@@ -1,3 +1,11 @@
+const hitOrMiss = (spaceStatus) => {
+  if (spaceStatus === 0) return "miss";
+
+  if (spaceStatus === 1) return "alreadyHit";
+
+  return "hit";
+};
+
 const ship = (length) => ({
   length,
   hitAmount: 0,
@@ -12,8 +20,22 @@ const ship = (length) => ({
   }
 });
 
-const gameboard = (player) => ({
-  name: player
+const gameboard = () => ({
+  board: [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ],
+  receiveAttack([a, b]) {
+    const hitStatus = hitOrMiss(this.board[a][b]);
+  }
 });
 
-export { ship, gameboard };
+export { ship, gameboard, hitOrMiss };
