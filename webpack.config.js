@@ -5,6 +5,7 @@ module.exports = {
   mode: "development",
   entry: {
     index: "./src/index.js",
+    factories: "./src/factories.js"
   },
   devtool: "inline-source-map",
   devServer: {
@@ -12,7 +13,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Development",
+      title: "Battleship!",
     }),
   ],
   output: {
