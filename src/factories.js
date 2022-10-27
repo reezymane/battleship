@@ -1,7 +1,7 @@
-const hitOrMiss = (spaceStatus) => {
-  if (spaceStatus === 0) return "miss";
+const hitOrMiss = (inCoordinate) => {
+  if (inCoordinate === 0) return "miss";
 
-  if (spaceStatus === 1) return "alreadyHit";
+  if (inCoordinate === 1) return "alreadyHit";
 
   return "hit";
 };
@@ -34,7 +34,14 @@ const gameboard = () => ({
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ],
   receiveAttack([a, b]) {
-    const hitStatus = hitOrMiss(this.board[a][b]);
+    const inCoordinate = this.board[a][b];
+    const hitStatus = hitOrMiss(inCoordinate);
+
+    if (hitStatus === "hit") {
+      inCoordinate.hit();
+    } else if (hitStatus === "miss") {
+      this.board[a][b] = 1;
+    }
   }
 });
 
