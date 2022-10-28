@@ -42,6 +42,29 @@ const gameboard = () => ({
     } else if (hitStatus === "miss") {
       this.board[a][b] = 1;
     }
+  },
+  allSunk([a, b]) {
+    if (a > 9) {
+      return true;
+    }
+
+    if (b < 10) {
+      const inCoordinate = this.board[a][b];
+
+      if (typeof inCoordinate !== "object") {
+        return this.allSunk([a, b + 1]);
+      }
+
+      if (inCoordinate.sunk === false) {
+        return false;
+      }
+
+      return this.allSunk([a, b + 1]);
+    }
+
+    if (b > 9) {
+      return this.allSunk([a + 1, 0]);
+    }
   }
 });
 
