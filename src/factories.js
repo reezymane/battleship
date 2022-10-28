@@ -68,6 +68,9 @@ const gameboard = () => ({
   }
 });
 
-const player = () => ({});
+const player = (name) => ({
+    name,
+    playerBoard: gameboard()
+  });
 
 export { ship, gameboard, hitOrMiss, player };
