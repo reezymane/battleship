@@ -1,4 +1,4 @@
-import { ship, gameboard, hitOrMiss } from "./factories.js";
+import { ship, gameboard, hitOrMiss, player } from "./factories.js";
 
 test("Ship factory function returns an object", () => {
   const testShip = ship(null);
@@ -119,4 +119,10 @@ test("gameboard.allSunk() returns false if only 1 ship is sunk", () => {
   testShip2.isSunk();
 
   expect(testBoard.allSunk([0, 0])).toBe(false);
+});
+
+test("player factory function returns an object", () => {
+  const player1 = player("rell");
+
+  expect(typeof player1).toBe("object");
 });
