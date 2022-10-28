@@ -1,4 +1,4 @@
-import { ship, gameboard, hitOrMiss, player } from "./factories.js";
+import { ship, gameboard, hitOrMiss, player } from "./factories";
 
 test("Ship factory function returns an object", () => {
   const testShip = ship(null);
