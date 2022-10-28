@@ -1,3 +1,4 @@
+// Determines if an attack hits or misses
 const hitOrMiss = (inCoordinate) => {
   if (inCoordinate === 0) return "miss";
 
@@ -6,6 +7,7 @@ const hitOrMiss = (inCoordinate) => {
   return "hit";
 };
 
+// Creates ships to place on gameboard
 const ship = (length) => ({
   length,
   hitAmount: 0,
@@ -20,6 +22,7 @@ const ship = (length) => ({
   }
 });
 
+// Creates a gameboard
 const gameboard = () => ({
   board: [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -33,6 +36,7 @@ const gameboard = () => ({
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ],
+  // Marks attacks on gameboard
   receiveAttack([a, b]) {
     const inCoordinate = this.board[a][b];
     const hitStatus = hitOrMiss(inCoordinate);
@@ -43,6 +47,7 @@ const gameboard = () => ({
       this.board[a][b] = 1;
     }
   },
+  // Checks if all ships are sunk
   allSunk([a, b]) {
     if (a > 9) {
       return true;
@@ -68,9 +73,10 @@ const gameboard = () => ({
   }
 });
 
+// Creates a player and a gameboard for them
 const player = (name) => ({
-    name,
-    playerBoard: gameboard()
-  });
+  name,
+  playerBoard: gameboard()
+});
 
 export { ship, gameboard, hitOrMiss, player };
