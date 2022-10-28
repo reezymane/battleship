@@ -68,4 +68,6 @@ const gameboard = () => ({
   }
 });
 
-export { ship, gameboard, hitOrMiss };
+const player = () => ({});
+
+export { ship, gameboard, hitOrMiss, player };
