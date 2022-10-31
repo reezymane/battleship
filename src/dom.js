@@ -38,11 +38,11 @@ const createRows = () => {
 };
 
 // Adds table to p1Board div
-const createTable = () => {
-  const board = document.querySelector(".p1Board");
+const createTable = (boardClass, tableClass) => {
+  const board = document.querySelector(boardClass);
   const table = document.createElement("table");
 
-  table.classList.add("p1Grid");
+  table.classList.add(tableClass);
   board.appendChild(table);
 
   createColumnHeadings();

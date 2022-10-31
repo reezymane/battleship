@@ -93,5 +93,7 @@ import { createTable } from "./dom";
 
   player2.playerBoard.board[7][5] = patrolBoat24;
 
-  createTable("p1Board");
+  // Displays player gameboards
+  createTable(".p1Board", "p1Grid");
+  createTable(".p2Board", "p2Grid");
 })();
