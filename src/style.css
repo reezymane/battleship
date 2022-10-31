@@ -19,6 +19,7 @@ body {
 
 .mainContainer {
   flex: 1;
+  display: flex;
 }
 
 footer {
