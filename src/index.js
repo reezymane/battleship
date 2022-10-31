@@ -1,5 +1,6 @@
 import "./style.css";
 import { player, ship } from "./factories";
+import { createTable } from "./dom";
 
 (() => {
   // Creates players and boards
@@ -91,4 +92,6 @@ import { player, ship } from "./factories";
   player2.playerBoard.board[3][9] = patrolBoat23;
 
   player2.playerBoard.board[7][5] = patrolBoat24;
+
+  createTable("p1Board");
 })();
