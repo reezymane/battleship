@@ -25,3 +25,7 @@ body {
 footer {
   width: 200px;
 }
+
+table {
+  border: 2px solid white;
+}
