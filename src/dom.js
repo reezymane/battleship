@@ -1,6 +1,6 @@
 // Creates the first row of the table and names columns
-const createColumnHeadings = () => {
-  const grid = document.querySelector(".p1Grid");
+const createColumnHeadings = (tableClass) => {
+  const grid = document.querySelector(`.${tableClass}`);
   const row = document.createElement("tr");
   const emptyHeading = document.createElement("th");
 
@@ -15,8 +15,8 @@ const createColumnHeadings = () => {
 };
 
 // Adds next row with heading and empty cells
-const createRows = () => {
-  const grid = document.querySelector(".p1Grid");
+const createRows = (tableClass) => {
+  const grid = document.querySelector(`.${tableClass}`);
 
   for (let bigI = 0; bigI < 10; bigI++) {
     const row = document.createElement("tr");
@@ -30,7 +30,9 @@ const createRows = () => {
     for (let littleI = 0; littleI < 10; littleI++) {
       const cell = document.createElement("td");
 
-      cell.classList.add(`${bigI},${littleI}`);
+      cell.classList.add("cell");
+      cell.setAttribute("data-x", bigI);
+      cell.setAttribute("data-y", littleI);
 
       row.appendChild(cell);
     }
@@ -45,8 +47,8 @@ const createTable = (boardClass, tableClass) => {
   table.classList.add(tableClass);
   board.appendChild(table);
 
-  createColumnHeadings();
-  createRows();
+  createColumnHeadings(tableClass);
+  createRows(tableClass);
 };
 
 export { createTable };

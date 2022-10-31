@@ -1,6 +1,6 @@
 import "./style.css";
 import { player, ship } from "./factories";
-import { createTable } from "./dom";
+import { createTable, colorShips } from "./dom";
 
 (() => {
   // Creates players and boards
