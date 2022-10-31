@@ -1,0 +1,26 @@
+/*Removes padding and margin from all elements*/
+* {
+  padding: 0;
+  margin: 0;
+}
+
+/*Set page size and backround image*/
+html {
+  background-image: url(./img/background.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/*Set page layout direction*/
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.mainContainer {
+  flex: 1;
+}
+
+footer {
+  width: 200px;
+}
