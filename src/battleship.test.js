@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { ship, gameboard, hitOrMiss, player } from "./factories";
 
 test("Ship factory function returns an object", () => {
