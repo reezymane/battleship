@@ -19,6 +19,19 @@ import { createTable } from "./dom";
   const patrolBoat13 = ship(1);
   const patrolBoat14 = ship(1);
 
+  const player1ships = [
+    battleship1,
+    destroyer11,
+    destroyer12,
+    submarine11,
+    submarine12,
+    submarine13,
+    patrolBoat11,
+    patrolBoat12,
+    patrolBoat13,
+    patrolBoat14
+  ];
+
   // Creates player2 ships
   const battleship2 = ship(4);
   const destroyer21 = ship(3);
@@ -30,6 +43,19 @@ import { createTable } from "./dom";
   const patrolBoat22 = ship(1);
   const patrolBoat23 = ship(1);
   const patrolBoat24 = ship(1);
+
+  const player2ships = [
+    battleship2,
+    destroyer21,
+    destroyer22,
+    submarine21,
+    submarine22,
+    submarine23,
+    patrolBoat21,
+    patrolBoat22,
+    patrolBoat23,
+    patrolBoat24
+  ];
 
   // Places player1 ships on gameboard
   player1.playerBoard.board[0][2] = battleship1;
@@ -101,13 +127,23 @@ import { createTable } from "./dom";
   player1.playerBoard.colorGameboardShips([0, 0]);
 
   const gridSquares = document.querySelectorAll(".p2Grid .cell");
-  // Gameboard receives attack when coordinate clicked
   gridSquares.forEach((cell) => {
     cell.addEventListener("click", () => {
+      // Gameboard receives attack when coordinate clicked
       player2.playerBoard.receiveAttack([
         Number(cell.dataset.x),
         Number(cell.dataset.y)
       ]);
+
+      // Checks each ships' sunk status
+      player2ships.forEach((item) => {
+        item.isSunk();
+      });
+
+      // Checks if all ships are sunk
+      if (player2.playerBoard.allSunk([0, 0])) {
+        // FUNCTION TO DISPLAY WINNER
+      }
     });
   });
 })();
