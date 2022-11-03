@@ -64,4 +64,47 @@ const colorCoordinate = ([a, b]) => {
   });
 };
 
-export { createTable, colorCoordinate };
+// Attacks gameboard and checks ships when coordinate clicked
+const clickAttack = (
+  tableClass,
+  playerBeingAttacked,
+  shipArray,
+  clickedArray
+) => {
+  const gridSquares = document.querySelectorAll(`${tableClass} .cell`);
+  const controller = new AbortController();
+
+  gridSquares.forEach((cell) => {
+    cell.addEventListener(
+      "click",
+      () => {
+        if (
+          !clickedArray.includes([
+            Number(cell.dataset.x),
+            Number(cell.dataset.y)
+          ])
+        ) {
+          // Adds coordinate to array of clicked coordinates
+          clickedArray.push([Number(cell.dataset.x), Number(cell.dataset.y)]);
+
+          // Gameboard receives attack when coordinate clicked
+          playerBeingAttacked.playerBoard.receiveAttack([
+            Number(cell.dataset.x),
+            Number(cell.dataset.y)
+          ]);
+
+          // Checks each ships' sunk status
+          shipArray.forEach((item) => {
+            item.isSunk();
+          });
+
+          // Disables click after player's turn
+          controller.abort();
+        }
+      },
+      { signal: controller.signal }
+    );
+  });
+};
+
+export { createTable, colorCoordinate, clickAttack };
