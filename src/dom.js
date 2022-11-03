@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-plusplus */
 // Creates the first row of the table and names columns
 const createColumnHeadings = (tableClass) => {
   const grid = document.querySelector(`.${tableClass}`);
@@ -51,4 +53,15 @@ const createTable = (boardClass, tableClass) => {
   createRows(tableClass);
 };
 
-export { createTable };
+// Colors the grid space of given coordinate
+const colorCoordinate = ([a, b]) => {
+  const gridCells = document.querySelectorAll(".p1Grid .cell");
+
+  gridCells.forEach((cell) => {
+    if (cell.dataset.x === `${a}` && cell.dataset.y === `${b}`) {
+      cell.style.backgroundColor = "yellow";
+    }
+  });
+};
+
+export { createTable, colorCoordinate };
