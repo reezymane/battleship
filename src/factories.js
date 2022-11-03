@@ -1,3 +1,6 @@
+/* eslint-disable consistent-return */
+import { colorCoordinate } from "./dom";
+
 // Determines if an attack hits or misses
 const hitOrMiss = (inCoordinate) => {
   if (inCoordinate === 0) return "miss";
@@ -69,6 +72,29 @@ const gameboard = () => ({
 
     if (b > 9) {
       return this.allSunk([a + 1, 0]);
+    }
+  },
+  // Runs a function to color grid space if
+  // it contains a ship
+  colorGameboardShips([a, b]) {
+    if (a > 9) {
+      return;
+    }
+
+    if (b < 10) {
+      const inCoordinate = this.board[a][b];
+
+      if (typeof inCoordinate !== "object") {
+        return this.colorGameboardShips([a, b + 1]);
+      }
+
+      colorCoordinate([a, b]);
+
+      return this.colorGameboardShips([a, b + 1]);
+    }
+
+    if (b > 9) {
+      return this.colorGameboardShips([a + 1, 0]);
     }
   }
 });
