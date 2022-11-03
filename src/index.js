@@ -1,6 +1,6 @@
 import "./style.css";
 import { player, ship } from "./factories";
-import { createTable } from "./dom";
+import { createTable, clickAttack } from "./dom";
 
 (() => {
   // Creates players and boards
@@ -126,24 +126,7 @@ import { createTable } from "./dom";
   // Colors player grid squares that contain ships
   player1.playerBoard.colorGameboardShips([0, 0]);
 
-  const gridSquares = document.querySelectorAll(".p2Grid .cell");
-  gridSquares.forEach((cell) => {
-    cell.addEventListener("click", () => {
-      // Gameboard receives attack when coordinate clicked
-      player2.playerBoard.receiveAttack([
-        Number(cell.dataset.x),
-        Number(cell.dataset.y)
-      ]);
-
-      // Checks each ships' sunk status
-      player2ships.forEach((item) => {
-        item.isSunk();
-      });
-
-      // Checks if all ships are sunk
-      if (player2.playerBoard.allSunk([0, 0])) {
-        // FUNCTION TO DISPLAY WINNER
-      }
-    });
-  });
+  const player1clickedArray = [];
+  const player2clickedArray = [];
+  clickAttack(".p2Grid", player2, player2ships, player2clickedArray);
 })();
