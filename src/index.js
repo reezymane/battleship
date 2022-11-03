@@ -1,6 +1,6 @@
 import "./style.css";
 import { player, ship } from "./factories";
-import { createTable, colorShips } from "./dom";
+import { createTable } from "./dom";
 
 (() => {
   // Creates players and boards
@@ -96,4 +96,7 @@ import { createTable, colorShips } from "./dom";
   // Displays player gameboards
   createTable(".p1Board", "p1Grid");
   createTable(".p2Board", "p2Grid");
+
+  // Colors player grid squares that contain ships
+  player1.playerBoard.colorGameboardShips([0, 0]);
 })();
