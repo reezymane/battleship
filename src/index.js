@@ -99,4 +99,15 @@ import { createTable } from "./dom";
 
   // Colors player grid squares that contain ships
   player1.playerBoard.colorGameboardShips([0, 0]);
+
+  const gridSquares = document.querySelectorAll(".p2Grid .cell");
+  // Gameboard receives attack when coordinate clicked
+  gridSquares.forEach((cell) => {
+    cell.addEventListener("click", () => {
+      player2.playerBoard.receiveAttack([
+        Number(cell.dataset.x),
+        Number(cell.dataset.y)
+      ]);
+    });
+  });
 })();
