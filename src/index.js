@@ -19,19 +19,6 @@ import { createTable, clickAttack } from "./dom";
   const patrolBoat13 = ship(1);
   const patrolBoat14 = ship(1);
 
-  const player1ships = [
-    battleship1,
-    destroyer11,
-    destroyer12,
-    submarine11,
-    submarine12,
-    submarine13,
-    patrolBoat11,
-    patrolBoat12,
-    patrolBoat13,
-    patrolBoat14
-  ];
-
   // Creates player2 ships
   const battleship2 = ship(4);
   const destroyer21 = ship(3);
@@ -43,19 +30,6 @@ import { createTable, clickAttack } from "./dom";
   const patrolBoat22 = ship(1);
   const patrolBoat23 = ship(1);
   const patrolBoat24 = ship(1);
-
-  const player2ships = [
-    battleship2,
-    destroyer21,
-    destroyer22,
-    submarine21,
-    submarine22,
-    submarine23,
-    patrolBoat21,
-    patrolBoat22,
-    patrolBoat23,
-    patrolBoat24
-  ];
 
   // Places player1 ships on gameboard
   player1.playerBoard.board[0][2] = battleship1;
@@ -128,5 +102,5 @@ import { createTable, clickAttack } from "./dom";
 
   const player1clickedArray = [];
   const player2clickedArray = [];
-  clickAttack(".p2Grid", player2, player2ships, player2clickedArray);
+  clickAttack(".p2Grid", player2, player2clickedArray);
 })();
