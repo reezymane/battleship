@@ -64,13 +64,13 @@ const colorCoordinate = ([a, b]) => {
   });
 };
 
+// Adds coordinate to array of clicked coordinates
+const coordinateClicked = (clickedArray, cell) => {
+  clickedArray.push([Number(cell.dataset.x), Number(cell.dataset.y)]);
+};
+
 // Attacks gameboard and checks ships when coordinate clicked
-const clickAttack = (
-  tableClass,
-  playerBeingAttacked,
-  shipArray,
-  clickedArray
-) => {
+const clickAttack = (tableClass, playerBeingAttacked, clickedArray) => {
   const gridSquares = document.querySelectorAll(`${tableClass} .cell`);
   const controller = new AbortController();
 
@@ -78,25 +78,19 @@ const clickAttack = (
     cell.addEventListener(
       "click",
       () => {
+        // Checks if coordinate has been clicked already
         if (
           !clickedArray.includes([
             Number(cell.dataset.x),
             Number(cell.dataset.y)
           ])
         ) {
-          // Adds coordinate to array of clicked coordinates
-          clickedArray.push([Number(cell.dataset.x), Number(cell.dataset.y)]);
+          coordinateClicked(clickedArray, cell);
 
-          // Gameboard receives attack when coordinate clicked
           playerBeingAttacked.playerBoard.receiveAttack([
             Number(cell.dataset.x),
             Number(cell.dataset.y)
           ]);
-
-          // Checks each ships' sunk status
-          shipArray.forEach((item) => {
-            item.isSunk();
-          });
 
           // Disables click after player's turn
           controller.abort();
