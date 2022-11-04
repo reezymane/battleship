@@ -46,6 +46,7 @@ const gameboard = () => ({
 
     if (hitStatus === "hit") {
       inCoordinate.hit();
+      inCoordinate.isSunk();
     } else if (hitStatus === "miss") {
       this.board[a][b] = 1;
     }
