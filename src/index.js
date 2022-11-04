@@ -93,14 +93,16 @@ import { createTable, clickAttack } from "./dom";
 
   player2.playerBoard.board[7][5] = patrolBoat24;
 
+  // Creates arrays for marked spots
+  const player1clickedArray = [];
+  const player2clickedArray = [];
+
+  // Turn by turn game loop, until a winner is decided
+
   // Displays player gameboards
   createTable(".p1Board", "p1Grid");
   createTable(".p2Board", "p2Grid");
 
   // Colors player grid squares that contain ships
   player1.playerBoard.colorGameboardShips([0, 0]);
-
-  const player1clickedArray = [];
-  const player2clickedArray = [];
-  clickAttack(".p2Grid", player2, player2clickedArray);
 })();
