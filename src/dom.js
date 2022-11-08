@@ -81,7 +81,18 @@ const wasCoordinateClicked = (playerAttacking, [x, y]) => {
   return false;
 };
 
-// Chooses a random coordinate to click
+// Determines which player goes next
+const whoseTurn = (hitStatus, playerAttacking, receivingAttack) => {
+  if (hitStatus === "hit") {
+    currentTurn.playerName = playerAttacking.name;
+  } else if (hitStatus === "alreadyHit") {
+    currentTurn.playerName = playerAttacking.name;
+  } else {
+    currentTurn.playerName = receivingAttack.name;
+  }
+};
+
+// Chooses a random coordinate for Computer's turn
 const computerClick = () => {
   if (currentTurn.playerName === "Computer") {
     const randomX = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
@@ -94,6 +105,7 @@ const computerClick = () => {
         Number(cell.dataset.y) === randomY
       ) {
         cell.click();
+        console.log("computer clicked!");
       }
     });
   }
@@ -102,6 +114,15 @@ const computerClick = () => {
 // Displays winner of the game
 const displayWinner = (playerAttacking) => {
   console.log(playerAttacking.name);
+};
+
+// Ends game and displays winner
+const playerWin = (playerAttacking, receivingAttack, controller) => {
+  if (receivingAttack.playerBoard.allSunk([0, 0])) {
+    controller.abort();
+
+    displayWinner(playerAttacking);
+  }
 };
 
 // Attacks gameboard and checks ships when coordinate clicked
@@ -128,21 +149,10 @@ const clickAttack = (
 
             const hitStatus = receivingAttack.playerBoard.receiveAttack([x, y]);
 
-            // Determines which player goes next
-            if (hitStatus === "hit") {
-              currentTurn.playerName = playerAttacking.name;
-            } else {
-              currentTurn.playerName = receivingAttack.name;
-            }
+            whoseTurn(hitStatus, playerAttacking, receivingAttack);
 
-            // Ends game and displays winner
-            if (receivingAttack.playerBoard.allSunk([0, 0])) {
-              controller.abort();
+            playerWin(playerAttacking, receivingAttack, controller);
 
-              displayWinner(playerAttacking);
-            }
-
-            // auto-click if the next turn is computer's
             computerClick();
           }
         }
