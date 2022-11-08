@@ -1,5 +1,5 @@
 import "./style.css";
-import { player, ship } from "./factories";
+import { player, ship, currentTurn } from "./factories";
 import { createTable, clickAttack } from "./dom";
 
 (() => {
@@ -93,16 +93,19 @@ import { createTable, clickAttack } from "./dom";
 
   player2.playerBoard.board[7][5] = patrolBoat24;
 
-  // Creates arrays for marked spots
-  const player1clickedArray = [];
-  const player2clickedArray = [];
-
-  // Turn by turn game loop, until a winner is decided
-
   // Displays player gameboards
   createTable(".p1Board", "p1Grid");
   createTable(".p2Board", "p2Grid");
 
   // Colors player grid squares that contain ships
   player1.playerBoard.colorGameboardShips([0, 0]);
+
+  // Determines which player goes first
+  currentTurn.playerName = player1.name;
+
+  // Creates gameboard eventlisteners and abort signal
+  const controller = new AbortController();
+
+  clickAttack(player1, player2, ".p2Grid", controller);
+  clickAttack(player2, player1, ".p1Grid", controller);
 })();
