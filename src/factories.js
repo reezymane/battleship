@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable consistent-return */
 import { colorCoordinate } from "./dom";
 
@@ -50,6 +51,8 @@ const gameboard = () => ({
     } else if (hitStatus === "miss") {
       this.board[a][b] = 1;
     }
+
+    return hitStatus;
   },
   // Checks if all ships are sunk
   allSunk([a, b]) {
@@ -103,7 +106,13 @@ const gameboard = () => ({
 // Creates a player and a gameboard for them
 const player = (name) => ({
   name,
-  playerBoard: gameboard()
+  playerBoard: gameboard(),
+  markedSpots: []
 });
 
-export { ship, gameboard, hitOrMiss, player };
+// Dynamic object to track player turns
+const currentTurn = {
+  playerName: null
+};
+
+export { ship, player, currentTurn };
