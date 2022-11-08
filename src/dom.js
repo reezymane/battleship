@@ -80,6 +80,10 @@ const wasCoordinateClicked = (playerAttacking, [x, y]) => {
 
   return false;
 };
+// Displays winner of the game
+const displayWinner = (playerAttacking) => {
+  console.log(playerAttacking.name);
+};
 
 // Attacks gameboard and checks ships when coordinate clicked
 const clickAttack = (
@@ -110,6 +114,13 @@ const clickAttack = (
               currentTurn.playerName = playerAttacking.name;
             } else {
               currentTurn.playerName = receivingAttack.name;
+            }
+
+            // Ends game and displays winner
+            if (receivingAttack.playerBoard.allSunk([0, 0])) {
+              controller.abort();
+
+              displayWinner(playerAttacking);
             }
           }
         }
