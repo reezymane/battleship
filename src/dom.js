@@ -1,5 +1,9 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable consistent-return */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
+import { currentTurn } from "./factories";
+
 // Creates the first row of the table and names columns
 const createColumnHeadings = (tableClass) => {
   const grid = document.querySelector(`.${tableClass}`);
@@ -64,36 +68,50 @@ const colorCoordinate = ([a, b]) => {
   });
 };
 
-// Adds coordinate to array of clicked coordinates
-const coordinateClicked = (clickedArray, cell) => {
-  clickedArray.push([Number(cell.dataset.x), Number(cell.dataset.y)]);
+// Checks if coordinate has been clicked already
+const wasCoordinateClicked = (playerAttacking, [x, y]) => {
+  for (let i = 0; i < playerAttacking.markedSpots.length; i++) {
+    const spot = playerAttacking.markedSpots[i];
+
+    if (spot[0] === x && spot[1] === y) {
+      return true;
+    }
+  }
+
+  return false;
 };
 
 // Attacks gameboard and checks ships when coordinate clicked
-const clickAttack = (tableClass, playerBeingAttacked, clickedArray) => {
+const clickAttack = (
+  playerAttacking,
+  receivingAttack,
+  tableClass,
+  controller
+) => {
   const gridSquares = document.querySelectorAll(`${tableClass} .cell`);
-  const controller = new AbortController();
 
   gridSquares.forEach((cell) => {
     cell.addEventListener(
       "click",
       () => {
-        // Checks if coordinate has been clicked already
-        if (
-          !clickedArray.includes([
-            Number(cell.dataset.x),
-            Number(cell.dataset.y)
-          ])
-        ) {
-          coordinateClicked(clickedArray, cell);
+        if (currentTurn.playerName === playerAttacking.name) {
+          // Sets coordinate values based on cell data
+          const x = Number(cell.dataset.x);
+          const y = Number(cell.dataset.y);
 
-          playerBeingAttacked.playerBoard.receiveAttack([
-            Number(cell.dataset.x),
-            Number(cell.dataset.y)
-          ]);
+          if (!wasCoordinateClicked(playerAttacking, [x, y])) {
+            // Adds coordinate to array of clicked coordinates
+            playerAttacking.markedSpots.push([x, y]);
 
-          // Disables click after player's turn
-          controller.abort();
+            const hitStatus = receivingAttack.playerBoard.receiveAttack([x, y]);
+
+            // Determines which player goes next
+            if (hitStatus === "hit") {
+              currentTurn.playerName = playerAttacking.name;
+            } else {
+              currentTurn.playerName = receivingAttack.name;
+            }
+          }
         }
       },
       { signal: controller.signal }
