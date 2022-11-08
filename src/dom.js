@@ -80,6 +80,25 @@ const wasCoordinateClicked = (playerAttacking, [x, y]) => {
 
   return false;
 };
+
+// Chooses a random coordinate to click
+const computerClick = () => {
+  if (currentTurn.playerName === "Computer") {
+    const randomX = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
+    const randomY = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
+
+    const coordinate = document.querySelectorAll(".p1Grid .cell");
+    coordinate.forEach((cell) => {
+      if (
+        Number(cell.dataset.x) === randomX &&
+        Number(cell.dataset.y) === randomY
+      ) {
+        cell.click();
+      }
+    });
+  }
+};
+
 // Displays winner of the game
 const displayWinner = (playerAttacking) => {
   console.log(playerAttacking.name);
@@ -122,6 +141,9 @@ const clickAttack = (
 
               displayWinner(playerAttacking);
             }
+
+            // auto-click if the next turn is computer's
+            computerClick();
           }
         }
       },
