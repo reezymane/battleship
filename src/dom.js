@@ -92,11 +92,33 @@ const whoseTurn = (hitStatus, playerAttacking, receivingAttack) => {
   }
 };
 
+// Returns which player is 'Computer'
+const whoIsComputer = (playerAttacking, receivingAttack) => {
+  if (playerAttacking.name === "Computer") {
+    return playerAttacking;
+  }
+
+  if (receivingAttack.name === "Computer") {
+    return receivingAttack;
+  }
+};
+
 // Chooses a random coordinate for Computer's turn
-const computerClick = () => {
+const computerClick = (playerAttacking, receivingAttack) => {
   if (currentTurn.playerName === "Computer") {
-    const randomX = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
-    const randomY = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
+    let randomX = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
+    let randomY = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
+
+    // Sets new (randomX, randomY) if computer clicked coordinate already
+    while (
+      wasCoordinateClicked(whoIsComputer(playerAttacking, receivingAttack), [
+        randomX,
+        randomY
+      ])
+    ) {
+      randomX = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
+      randomY = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
+    }
 
     const coordinate = document.querySelectorAll(".p1Grid .cell");
     coordinate.forEach((cell) => {
@@ -105,7 +127,6 @@ const computerClick = () => {
         Number(cell.dataset.y) === randomY
       ) {
         cell.click();
-        console.log("computer clicked!");
       }
     });
   }
@@ -153,7 +174,7 @@ const clickAttack = (
 
             playerWin(playerAttacking, receivingAttack, controller);
 
-            computerClick();
+            computerClick(playerAttacking, receivingAttack);
           }
         }
       },
