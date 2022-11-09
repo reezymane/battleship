@@ -126,7 +126,9 @@ const computerClick = (playerAttacking, receivingAttack) => {
         Number(cell.dataset.x) === randomX &&
         Number(cell.dataset.y) === randomY
       ) {
-        cell.click();
+        setTimeout(() => {
+          cell.click();
+        }, "2000");
       }
     });
   }
