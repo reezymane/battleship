@@ -146,6 +146,21 @@ const playerWin = (playerAttacking, receivingAttack, controller) => {
   }
 };
 
+// Changes cell color when attacked
+const colorOnAttack = (cell, hitStatus) => {
+  if (hitStatus === "miss") {
+    cell.style.backgroundColor = "tan";
+    cell.textContent = "•";
+  }
+
+  if (hitStatus === "hit") {
+    cell.style.backgroundColor = "pink";
+    cell.style.border = "1px solid red";
+    cell.style.color = "red";
+    cell.textContent = "X";
+  }
+};
+
 // Attacks gameboard and checks ships when coordinate clicked
 const clickAttack = (
   playerAttacking,
@@ -169,6 +184,8 @@ const clickAttack = (
             playerAttacking.markedSpots.push([x, y]);
 
             const hitStatus = receivingAttack.playerBoard.receiveAttack([x, y]);
+
+            colorOnAttack(cell, hitStatus);
 
             whoseTurn(hitStatus, playerAttacking, receivingAttack);
 
