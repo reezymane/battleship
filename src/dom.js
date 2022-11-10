@@ -125,8 +125,6 @@ const adjacentAttack = (
 ) => {
   // If adjacent cell is within gameboard and hasn't been clicked
   if (
-    x >= 0 &&
-    x <= 9 &&
     y + 1 >= 0 &&
     y + 1 <= 9 &&
     !wasCoordinateClicked(whoIsComputer(playerAttacking, receivingAttack), [
@@ -138,8 +136,6 @@ const adjacentAttack = (
   } else if (
     x - 1 >= 0 &&
     x - 1 <= 9 &&
-    y >= 0 &&
-    y <= 9 &&
     !wasCoordinateClicked(whoIsComputer(playerAttacking, receivingAttack), [
       x - 1,
       y
@@ -147,8 +143,6 @@ const adjacentAttack = (
   ) {
     correctCell(x - 1, y);
   } else if (
-    x >= 0 &&
-    x <= 9 &&
     y - 1 >= 0 &&
     y - 1 <= 9 &&
     !wasCoordinateClicked(whoIsComputer(playerAttacking, receivingAttack), [
@@ -160,8 +154,6 @@ const adjacentAttack = (
   } else if (
     x + 1 >= 0 &&
     x + 1 <= 9 &&
-    y >= 0 &&
-    y <= 9 &&
     !wasCoordinateClicked(whoIsComputer(playerAttacking, receivingAttack), [
       x + 1,
       y
