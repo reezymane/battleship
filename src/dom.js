@@ -103,34 +103,104 @@ const whoIsComputer = (playerAttacking, receivingAttack) => {
   }
 };
 
-// Chooses a random coordinate for Computer's turn
-const computerClick = (playerAttacking, receivingAttack) => {
+// Selects correct cell to click
+const correctCell = (x, y) => {
+  const coordinate = document.querySelectorAll(".p1Grid .cell");
+  coordinate.forEach((cell) => {
+    if (Number(cell.dataset.x) === x && Number(cell.dataset.y) === y) {
+      setTimeout(() => {
+        cell.click();
+      }, "2000");
+    }
+  });
+};
+
+// Attacks an adjacent cell if computer previously hit
+const adjacentAttack = (
+  playerAttacking,
+  receivingAttack,
+  [x, y],
+  randomX,
+  randomY
+) => {
+  // If adjacent cell is within gameboard and hasn't been clicked
+  if (
+    x >= 0 &&
+    x <= 9 &&
+    y + 1 >= 0 &&
+    y + 1 <= 9 &&
+    !wasCoordinateClicked(whoIsComputer(playerAttacking, receivingAttack), [
+      x,
+      y + 1
+    ])
+  ) {
+    correctCell(x, y + 1);
+  } else if (
+    x - 1 >= 0 &&
+    x - 1 <= 9 &&
+    y >= 0 &&
+    y <= 9 &&
+    !wasCoordinateClicked(whoIsComputer(playerAttacking, receivingAttack), [
+      x - 1,
+      y
+    ])
+  ) {
+    correctCell(x - 1, y);
+  } else if (
+    x >= 0 &&
+    x <= 9 &&
+    y - 1 >= 0 &&
+    y - 1 <= 9 &&
+    !wasCoordinateClicked(whoIsComputer(playerAttacking, receivingAttack), [
+      x,
+      y - 1
+    ])
+  ) {
+    correctCell(x, y - 1);
+  } else if (
+    x + 1 >= 0 &&
+    x + 1 <= 9 &&
+    y >= 0 &&
+    y <= 9 &&
+    !wasCoordinateClicked(whoIsComputer(playerAttacking, receivingAttack), [
+      x + 1,
+      y
+    ])
+  ) {
+    correctCell(x + 1, y);
+  } else {
+    correctCell(randomX, randomY);
+  }
+};
+
+// Chooses a coordinate for Computer's turn
+const computerClick = (playerAttacking, receivingAttack, [x, y], hitStatus) => {
   if (currentTurn.playerName === "Computer") {
     let randomX = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
     let randomY = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
 
-    // Sets new (randomX, randomY) if computer clicked coordinate already
-    while (
-      wasCoordinateClicked(whoIsComputer(playerAttacking, receivingAttack), [
+    if (hitStatus === "hit") {
+      adjacentAttack(
+        playerAttacking,
+        receivingAttack,
+        [x, y],
         randomX,
         randomY
-      ])
-    ) {
-      randomX = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
-      randomY = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
-    }
-
-    const coordinate = document.querySelectorAll(".p1Grid .cell");
-    coordinate.forEach((cell) => {
-      if (
-        Number(cell.dataset.x) === randomX &&
-        Number(cell.dataset.y) === randomY
+      );
+    } else {
+      // Sets new (randomX, randomY) if computer clicked coordinate already
+      while (
+        wasCoordinateClicked(whoIsComputer(playerAttacking, receivingAttack), [
+          randomX,
+          randomY
+        ])
       ) {
-        setTimeout(() => {
-          cell.click();
-        }, "2000");
+        randomX = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
+        randomY = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
       }
-    });
+
+      correctCell(randomX, randomY);
+    }
   }
 };
 
@@ -193,7 +263,7 @@ const clickAttack = (
 
             playerWin(playerAttacking, receivingAttack, controller);
 
-            computerClick(playerAttacking, receivingAttack);
+            computerClick(playerAttacking, receivingAttack, [x, y], hitStatus);
           }
         }
       },
