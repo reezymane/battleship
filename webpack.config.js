@@ -5,7 +5,8 @@ module.exports = {
   entry: {
     index: "./src/index.js",
     factories: "./src/factories.js",
-    dom: "./src/dom.js"
+    dom: "./src/dom.js",
+    gameModule: "./src/gameModule.js"
   },
   devtool: "inline-source-map",
   devServer: {
