@@ -115,4 +115,4 @@ const currentTurn = {
   playerName: null
 };
 
-export { ship, player, currentTurn };
+export { ship, player, currentTurn, gameboard, hitOrMiss };
