@@ -29,15 +29,7 @@ const dragOver = (ev) => {
 const drop = (ev) => {
   ev.preventDefault();
   const data = ev.dataTransfer.getData("text");
-  ev.target.appendChild(document.getElementById(data));
-};
-
-// Cells listen for an item to be dropped
-const dropListener = () => {
-  const gridCells = document.querySelectorAll(".p1Grid .cell");
-  gridCells.forEach((cell) => {
-    cell.addEventListener("drop", drop);
-  });
+  return data;
 };
 
 // Cells listen for items to be dragged over
@@ -171,6 +163,6 @@ export {
   colorCoordinate,
   clickAttack,
   dragListener,
-  dropListener,
+  drop,
   dragOverListener
 };
