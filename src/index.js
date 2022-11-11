@@ -1,6 +1,12 @@
 import "./style.css";
 import { player, ship, currentTurn } from "./factories";
-import { createTable, clickAttack } from "./dom";
+import {
+  createTable,
+  clickAttack,
+  dragListener,
+  dropListener,
+  dragOverListener
+} from "./dom";
 
 (() => {
   // Creates players and boards
@@ -96,6 +102,11 @@ import { createTable, clickAttack } from "./dom";
   // Displays player gameboards
   createTable(".p1Board", "p1Grid");
   createTable(".p2Board", "p2Grid");
+
+  // Makes ship divs draggable
+  dragListener("#battleship");
+  dropListener();
+  dragOverListener();
 
   // Colors player grid squares that contain ships
   player1.playerBoard.colorGameboardShips([0, 0]);

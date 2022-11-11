@@ -9,6 +9,45 @@ import {
   computerClick
 } from "./gameModule";
 
+// Allows ships to be dragged
+const drag = (ev) => {
+  ev.dataTransfer.setData("text", ev.target.id);
+};
+
+// Stores ***INFO*** when drag starts
+const dragListener = (shipID) => {
+  const ship = document.querySelector(shipID);
+  ship.addEventListener("dragstart", drag);
+};
+
+// Prevents the browser default handling of the data
+const dragOver = (ev) => {
+  ev.preventDefault();
+};
+
+// ***DOES ACTIONs*** when item is dropped
+const drop = (ev) => {
+  ev.preventDefault();
+  const data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+};
+
+// Cells listen for an item to be dropped
+const dropListener = () => {
+  const gridCells = document.querySelectorAll(".p1Grid .cell");
+  gridCells.forEach((cell) => {
+    cell.addEventListener("drop", drop);
+  });
+};
+
+// Cells listen for items to be dragged over
+const dragOverListener = () => {
+  const gridCells = document.querySelectorAll(".p1Grid .cell");
+  gridCells.forEach((cell) => {
+    cell.addEventListener("dragover", dragOver);
+  });
+};
+
 // Creates the first row of the table and names columns
 const createColumnHeadings = (tableClass) => {
   const grid = document.querySelector(`.${tableClass}`);
@@ -127,4 +166,11 @@ const clickAttack = (
   });
 };
 
-export { createTable, colorCoordinate, clickAttack };
+export {
+  createTable,
+  colorCoordinate,
+  clickAttack,
+  dragListener,
+  dropListener,
+  dragOverListener
+};
