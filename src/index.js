@@ -4,7 +4,7 @@ import {
   createTable,
   clickAttack,
   dragListener,
-  dropListener,
+  drop,
   dragOverListener
 } from "./dom";
 
@@ -104,9 +104,17 @@ import {
   createTable(".p2Board", "p2Grid");
 
   // Makes ship divs draggable
-  dragListener("#battleship");
-  dropListener();
+  dragListener("#battleship1");
   dragOverListener();
+
+  // Adds dropped ship to gameboard in player object and interface
+  const gridCells = document.querySelectorAll(".p1Grid .cell");
+  gridCells.forEach((cell) => {
+    cell.addEventListener("drop", (event) => {
+      const shipName = drop(event);
+      console.log(shipName);
+    });
+  });
 
   // Colors player grid squares that contain ships
   player1.playerBoard.colorGameboardShips([0, 0]);
