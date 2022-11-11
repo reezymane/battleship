@@ -72,3 +72,9 @@ div[id^="submarine"] {
 div[id^="patrol"] {
   width: 30px;
 }
+
+.ship {
+  border: 2px solid greenyellow;
+  background-color: rgb(255, 255, 129);
+  height: 30px;
+}
