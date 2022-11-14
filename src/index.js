@@ -39,32 +39,32 @@ import {
 
   // Places player1 ships on gameboard
   // player1.playerBoard.board[0][2] = battleship1;
-  // player1.playerBoard.board[0][3] = battleship1;
-  // player1.playerBoard.board[0][4] = battleship1;
-  // player1.playerBoard.board[0][5] = battleship1;
+  player1.playerBoard.board[0][3] = battleship1;
+  player1.playerBoard.board[0][4] = battleship1;
+  player1.playerBoard.board[0][5] = battleship1;
 
-  // player1.playerBoard.board[0][0] = submarine11;
-  // player1.playerBoard.board[1][0] = submarine11;
+  player1.playerBoard.board[0][0] = submarine11;
+  player1.playerBoard.board[1][0] = submarine11;
 
-  // player1.playerBoard.board[2][3] = submarine12;
-  // player1.playerBoard.board[3][3] = submarine12;
+  player1.playerBoard.board[2][3] = submarine12;
+  player1.playerBoard.board[3][3] = submarine12;
 
-  // player1.playerBoard.board[7][8] = submarine13;
-  // player1.playerBoard.board[7][9] = submarine13;
+  player1.playerBoard.board[7][8] = submarine13;
+  player1.playerBoard.board[7][9] = submarine13;
 
-  // player1.playerBoard.board[5][3] = destroyer11;
-  // player1.playerBoard.board[5][4] = destroyer11;
-  // player1.playerBoard.board[5][5] = destroyer11;
+  player1.playerBoard.board[5][3] = destroyer11;
+  player1.playerBoard.board[5][4] = destroyer11;
+  player1.playerBoard.board[5][5] = destroyer11;
 
-  // player1.playerBoard.board[9][2] = destroyer12;
-  // player1.playerBoard.board[9][3] = destroyer12;
-  // player1.playerBoard.board[9][4] = destroyer12;
+  player1.playerBoard.board[9][2] = destroyer12;
+  player1.playerBoard.board[9][3] = destroyer12;
+  player1.playerBoard.board[9][4] = destroyer12;
 
-  // player1.playerBoard.board[1][8] = patrolBoat11;
+  player1.playerBoard.board[1][8] = patrolBoat11;
 
-  // player1.playerBoard.board[2][5] = patrolBoat12;
+  player1.playerBoard.board[2][5] = patrolBoat12;
 
-  // player1.playerBoard.board[3][9] = patrolBoat13;
+  player1.playerBoard.board[3][9] = patrolBoat13;
 
   player1.playerBoard.board[7][5] = patrolBoat14;
 
@@ -116,17 +116,34 @@ import {
       const xCoord = Number(cell.dataset.x);
       const yCoord = Number(cell.dataset.y);
 
-      const right = player1.playerBoard.enoughSpaces(
-        xCoord,
-        yCoord,
-        4,
-        "right"
-      );
-      const left = player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "left");
-      const down = player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "down");
-      const up = player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "up");
+      // Decides which direction is a valid move
+      if (player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "right")) {
+        if (player1.playerBoard.spaceBetween(xCoord, yCoord, 4, "right")) {
+          // *** Functions to run on valid move ***
+          console.log("magic to the right!");
+        }
+      }
 
-      console.log(player1.playerBoard.spaceBetween(xCoord, yCoord, 4, "right"));
+      if (player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "left")) {
+        if (player1.playerBoard.spaceBetween(xCoord, yCoord, 4, "left")) {
+          // *** Functions to run on valid move ***
+          console.log("magic to the left!");
+        }
+      }
+
+      if (player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "down")) {
+        if (player1.playerBoard.spaceBetween(xCoord, yCoord, 4, "down")) {
+          // *** Functions to run on valid move ***
+          console.log("magic to the down!");
+        }
+      }
+
+      if (player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "up")) {
+        if (player1.playerBoard.spaceBetween(xCoord, yCoord, 4, "up")) {
+          // *** Functions to run on valid move ***
+          console.log("magic to the up!");
+        }
+      }
     });
   });
 
