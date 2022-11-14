@@ -111,36 +111,34 @@ import {
   const gridCells = document.querySelectorAll(".p1Grid .cell");
   gridCells.forEach((cell) => {
     cell.addEventListener("drop", (event) => {
-      const shipName = drop(event);
-
       const xCoord = Number(cell.dataset.x);
       const yCoord = Number(cell.dataset.y);
 
       // Decides which direction is a valid move
       if (player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "right")) {
         if (player1.playerBoard.spaceBetween(xCoord, yCoord, 4, "right")) {
-          // *** Functions to run on valid move ***
+          // *** drop(event) to run on valid move ***
           console.log("magic to the right!");
         }
       }
 
       if (player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "left")) {
         if (player1.playerBoard.spaceBetween(xCoord, yCoord, 4, "left")) {
-          // *** Functions to run on valid move ***
+          // *** drop(event) to run on valid move ***
           console.log("magic to the left!");
         }
       }
 
       if (player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "down")) {
         if (player1.playerBoard.spaceBetween(xCoord, yCoord, 4, "down")) {
-          // *** Functions to run on valid move ***
+          // *** drop(event) to run on valid move ***
           console.log("magic to the down!");
         }
       }
 
       if (player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "up")) {
         if (player1.playerBoard.spaceBetween(xCoord, yCoord, 4, "up")) {
-          // *** Functions to run on valid move ***
+          // *** drop(event) to run on valid move ***
           console.log("magic to the up!");
         }
       }
