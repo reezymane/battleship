@@ -66,7 +66,7 @@ import {
 
   // player1.playerBoard.board[3][9] = patrolBoat13;
 
-  // player1.playerBoard.board[7][5] = patrolBoat14;
+  player1.playerBoard.board[7][5] = patrolBoat14;
 
   // Places player1 ships on gameboard
   player2.playerBoard.board[0][2] = battleship2;
@@ -126,7 +126,7 @@ import {
       const down = player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "down");
       const up = player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "up");
 
-      console.log(player1.playerBoard.spaceBetween(xCoord, yCoord));
+      console.log(player1.playerBoard.spaceBetween(xCoord, yCoord, 4, "right"));
     });
   });
 

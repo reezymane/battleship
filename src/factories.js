@@ -151,15 +151,8 @@ const gameboard = () => ({
     return true;
   },
   // Checks if there's enough space between ships set and ships being dropped
-  spaceBetween(xCoord, yCoord) {
-    // each coordinate visit should check
-    // top/top-right/right/bottom-right/bottom/bottom-left/left/top-left
-    // if space is off the board, that direction = true
-    // if space = 0, that direction = true
-    // if space = object, that direction = false
-    // if any of those are false, return false
-    // else check next coordinate in given direction
-
+  spaceBetween(xCoord, yCoord, shipLength, direction) {
+    // Checks if surrounding coordinates are empty/undefined
     const top = this.spaceEmpty(xCoord - 1, yCoord);
     const topRight = this.spaceEmpty(xCoord - 1, yCoord + 1);
     const right = this.spaceEmpty(xCoord, yCoord + 1);
@@ -169,16 +162,42 @@ const gameboard = () => ({
     const left = this.spaceEmpty(xCoord, yCoord - 1);
     const topLeft = this.spaceEmpty(xCoord - 1, yCoord - 1);
 
-    return [
-      top,
-      topRight,
-      right,
-      bottomRight,
-      bottom,
-      bottomLeft,
-      left,
-      topLeft
-    ];
+    // If any surrounding coordinates aren't empty, return false
+    if (
+      !(
+        top &&
+        topRight &&
+        right &&
+        bottomRight &&
+        bottom &&
+        bottomLeft &&
+        left &&
+        topLeft
+      )
+    ) {
+      return false;
+    }
+
+    if (shipLength === 0) {
+      return true;
+    }
+
+    // Check next coordinate in given direction
+    if (direction === "right") {
+      return this.spaceBetween(xCoord, yCoord + 1, shipLength - 1, direction);
+    }
+
+    if (direction === "left") {
+      return this.spaceBetween(xCoord, yCoord - 1, shipLength - 1, direction);
+    }
+
+    if (direction === "down") {
+      return this.spaceBetween(xCoord + 1, yCoord, shipLength - 1, direction);
+    }
+
+    if (direction === "up") {
+      return this.spaceBetween(xCoord - 1, yCoord, shipLength - 1, direction);
+    }
   }
 });
 
