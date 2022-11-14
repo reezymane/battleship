@@ -113,30 +113,18 @@ import {
     cell.addEventListener("drop", (event) => {
       const shipName = drop(event);
 
+      const xCoord = Number(cell.dataset.x);
+      const yCoord = Number(cell.dataset.y);
+
       const right = player1.playerBoard.enoughSpaces(
-        cell.dataset.x,
-        cell.dataset.y,
+        xCoord,
+        yCoord,
         4,
         "right"
       );
-      const left = player1.playerBoard.enoughSpaces(
-        cell.dataset.x,
-        cell.dataset.y,
-        4,
-        "left"
-      );
-      const down = player1.playerBoard.enoughSpaces(
-        cell.dataset.x,
-        cell.dataset.y,
-        4,
-        "down"
-      );
-      const up = player1.playerBoard.enoughSpaces(
-        cell.dataset.x,
-        cell.dataset.y,
-        4,
-        "up"
-      );
+      const left = player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "left");
+      const down = player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "down");
+      const up = player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "up");
 
       console.log(right, left, down, up);
     });

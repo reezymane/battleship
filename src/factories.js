@@ -103,22 +103,19 @@ const gameboard = () => ({
     }
   },
   // Checks if there are enough spaces right/left/down/up for a ship
-  enoughSpaces(x, y, shipLength, direction) {
-    const xCoord = Number(x);
-    const yCoord = Number(y);
-
+  enoughSpaces(xCoord, yCoord, shipLength, direction) {
     // If coordinate is off the board, return false
     if (xCoord < 10 && xCoord > -1 && yCoord < 10 && yCoord > -1) {
       const inCoordinate = this.board[xCoord][yCoord];
 
       // If a ship is already in coordinate, return false
       if (typeof inCoordinate === "object") {
-        return "false";
+        return false;
       }
 
       // If full length of ship is reached, return true
       if (shipLength === 1) {
-        return "true";
+        return true;
       }
 
       // Check next coordinate in given direction
@@ -139,8 +136,10 @@ const gameboard = () => ({
       }
     }
 
-    return "false";
-  }
+    return false;
+  },
+  // Checks if there's enough space between ships set and ships being dropped
+  spaceBetween(xCoord, yCoord, shipLength, direction) {}
 });
 
 // Creates a player and a gameboard for them
