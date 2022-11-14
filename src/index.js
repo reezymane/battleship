@@ -38,35 +38,35 @@ import {
   const patrolBoat24 = ship(1);
 
   // Places player1 ships on gameboard
-  player1.playerBoard.board[0][2] = battleship1;
-  player1.playerBoard.board[0][3] = battleship1;
-  player1.playerBoard.board[0][4] = battleship1;
-  player1.playerBoard.board[0][5] = battleship1;
+  // player1.playerBoard.board[0][2] = battleship1;
+  // player1.playerBoard.board[0][3] = battleship1;
+  // player1.playerBoard.board[0][4] = battleship1;
+  // player1.playerBoard.board[0][5] = battleship1;
 
-  player1.playerBoard.board[0][0] = submarine11;
-  player1.playerBoard.board[1][0] = submarine11;
+  // player1.playerBoard.board[0][0] = submarine11;
+  // player1.playerBoard.board[1][0] = submarine11;
 
-  player1.playerBoard.board[2][3] = submarine12;
-  player1.playerBoard.board[3][3] = submarine12;
+  // player1.playerBoard.board[2][3] = submarine12;
+  // player1.playerBoard.board[3][3] = submarine12;
 
-  player1.playerBoard.board[7][8] = submarine13;
-  player1.playerBoard.board[7][9] = submarine13;
+  // player1.playerBoard.board[7][8] = submarine13;
+  // player1.playerBoard.board[7][9] = submarine13;
 
-  player1.playerBoard.board[5][3] = destroyer11;
-  player1.playerBoard.board[5][4] = destroyer11;
-  player1.playerBoard.board[5][5] = destroyer11;
+  // player1.playerBoard.board[5][3] = destroyer11;
+  // player1.playerBoard.board[5][4] = destroyer11;
+  // player1.playerBoard.board[5][5] = destroyer11;
 
-  player1.playerBoard.board[9][2] = destroyer12;
-  player1.playerBoard.board[9][3] = destroyer12;
-  player1.playerBoard.board[9][4] = destroyer12;
+  // player1.playerBoard.board[9][2] = destroyer12;
+  // player1.playerBoard.board[9][3] = destroyer12;
+  // player1.playerBoard.board[9][4] = destroyer12;
 
-  player1.playerBoard.board[1][8] = patrolBoat11;
+  // player1.playerBoard.board[1][8] = patrolBoat11;
 
-  player1.playerBoard.board[2][5] = patrolBoat12;
+  // player1.playerBoard.board[2][5] = patrolBoat12;
 
-  player1.playerBoard.board[3][9] = patrolBoat13;
+  // player1.playerBoard.board[3][9] = patrolBoat13;
 
-  player1.playerBoard.board[7][5] = patrolBoat14;
+  // player1.playerBoard.board[7][5] = patrolBoat14;
 
   // Places player1 ships on gameboard
   player2.playerBoard.board[0][2] = battleship2;
@@ -112,7 +112,33 @@ import {
   gridCells.forEach((cell) => {
     cell.addEventListener("drop", (event) => {
       const shipName = drop(event);
-      console.log(shipName);
+
+      const right = player1.playerBoard.enoughSpaces(
+        cell.dataset.x,
+        cell.dataset.y,
+        4,
+        "right"
+      );
+      const left = player1.playerBoard.enoughSpaces(
+        cell.dataset.x,
+        cell.dataset.y,
+        4,
+        "left"
+      );
+      const down = player1.playerBoard.enoughSpaces(
+        cell.dataset.x,
+        cell.dataset.y,
+        4,
+        "down"
+      );
+      const up = player1.playerBoard.enoughSpaces(
+        cell.dataset.x,
+        cell.dataset.y,
+        4,
+        "up"
+      );
+
+      console.log(right, left, down, up);
     });
   });
 

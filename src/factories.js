@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable import/no-cycle */
 /* eslint-disable consistent-return */
 import { colorCoordinate } from "./dom";
@@ -100,6 +101,45 @@ const gameboard = () => ({
     if (b > 9) {
       return this.colorGameboardShips([a + 1, 0]);
     }
+  },
+  // Checks if there are enough spaces right/left/down/up for a ship
+  enoughSpaces(x, y, shipLength, direction) {
+    const xCoord = Number(x);
+    const yCoord = Number(y);
+
+    // If coordinate is off the board, return false
+    if (xCoord < 10 && xCoord > -1 && yCoord < 10 && yCoord > -1) {
+      const inCoordinate = this.board[xCoord][yCoord];
+
+      // If a ship is already in coordinate, return false
+      if (typeof inCoordinate === "object") {
+        return "false";
+      }
+
+      // If full length of ship is reached, return true
+      if (shipLength === 1) {
+        return "true";
+      }
+
+      // Check next coordinate in given direction
+      if (direction === "right") {
+        return this.enoughSpaces(xCoord, yCoord + 1, shipLength - 1, direction);
+      }
+
+      if (direction === "left") {
+        return this.enoughSpaces(xCoord, yCoord - 1, shipLength - 1, direction);
+      }
+
+      if (direction === "down") {
+        return this.enoughSpaces(xCoord + 1, yCoord, shipLength - 1, direction);
+      }
+
+      if (direction === "up") {
+        return this.enoughSpaces(xCoord - 1, yCoord, shipLength - 1, direction);
+      }
+    }
+
+    return "false";
   }
 });
 
