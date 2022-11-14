@@ -138,8 +138,48 @@ const gameboard = () => ({
 
     return false;
   },
+  // Returns true if coordinate is undefined or empty
+  spaceEmpty(xCoord, yCoord) {
+    if (xCoord < 10 && xCoord > -1 && yCoord < 10 && yCoord > -1) {
+      if (this.board[xCoord][yCoord] === 0) {
+        return true;
+      }
+
+      return false;
+    }
+
+    return true;
+  },
   // Checks if there's enough space between ships set and ships being dropped
-  spaceBetween(xCoord, yCoord, shipLength, direction) {}
+  spaceBetween(xCoord, yCoord) {
+    // each coordinate visit should check
+    // top/top-right/right/bottom-right/bottom/bottom-left/left/top-left
+    // if space is off the board, that direction = true
+    // if space = 0, that direction = true
+    // if space = object, that direction = false
+    // if any of those are false, return false
+    // else check next coordinate in given direction
+
+    const top = this.spaceEmpty(xCoord - 1, yCoord);
+    const topRight = this.spaceEmpty(xCoord - 1, yCoord + 1);
+    const right = this.spaceEmpty(xCoord, yCoord + 1);
+    const bottomRight = this.spaceEmpty(xCoord + 1, yCoord + 1);
+    const bottom = this.spaceEmpty(xCoord + 1, yCoord);
+    const bottomLeft = this.spaceEmpty(xCoord + 1, yCoord - 1);
+    const left = this.spaceEmpty(xCoord, yCoord - 1);
+    const topLeft = this.spaceEmpty(xCoord - 1, yCoord - 1);
+
+    return [
+      top,
+      topRight,
+      right,
+      bottomRight,
+      bottom,
+      bottomLeft,
+      left,
+      topLeft
+    ];
+  }
 });
 
 // Creates a player and a gameboard for them

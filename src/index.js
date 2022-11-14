@@ -126,7 +126,7 @@ import {
       const down = player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "down");
       const up = player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "up");
 
-      console.log(right, left, down, up);
+      console.log(player1.playerBoard.spaceBetween(xCoord, yCoord));
     });
   });
 
