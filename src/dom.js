@@ -59,45 +59,51 @@ const shipIdentify = (ev) => {
 };
 
 // Adds dropped ships to player gameboard
-const dropToGameboard = (ev, x, y, shipLength, direction) => {
+const dropToGameboard = (ev, x, y, shipName, shipLength, direction) => {
   ev.preventDefault();
 
+  // Iterates through object to place correct ship on gameboard, in correct direction
   if (direction === "right") {
     for (let i = 0; i < shipLength; i++) {
-      // iterate through player1ships
-      // if key matches shipName
-      // add player1Ships.key to board
       for (const [key, value] of Object.entries(player1Ships)) {
-        if (key) {
+        if (key === shipName) {
+          player1.playerBoard.board[x][y] = value;
+          y++;
         }
       }
-      player1.playerBoard.board[x][y] = {};
-      y++;
-      console.log(player1.playerBoard.board);
     }
   }
 
   if (direction === "left") {
     for (let i = 0; i < shipLength; i++) {
-      player1.playerBoard.board[x][y] = {};
-      y--;
-      console.log(player1.playerBoard.board);
+      for (const [key, value] of Object.entries(player1Ships)) {
+        if (key === shipName) {
+          player1.playerBoard.board[x][y] = value;
+          y--;
+        }
+      }
     }
   }
 
   if (direction === "down") {
     for (let i = 0; i < shipLength; i++) {
-      player1.playerBoard.board[x][y] = {};
-      x++;
-      console.log(player1.playerBoard.board);
+      for (const [key, value] of Object.entries(player1Ships)) {
+        if (key === shipName) {
+          player1.playerBoard.board[x][y] = value;
+          x++;
+        }
+      }
     }
   }
 
   if (direction === "up") {
     for (let i = 0; i < shipLength; i++) {
-      player1.playerBoard.board[x][y] = {};
-      x--;
-      console.log(player1.playerBoard.board);
+      for (const [key, value] of Object.entries(player1Ships)) {
+        if (key === shipName) {
+          player1.playerBoard.board[x][y] = value;
+          x--;
+        }
+      }
     }
   }
 };

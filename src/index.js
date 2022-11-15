@@ -1,103 +1,45 @@
 import "./style.css";
-import { player, ship, currentTurn } from "./factories";
+import { currentTurn, player1, player2, player2Ships } from "./factories";
 import {
   createTable,
   clickAttack,
   dragListener,
-  drop,
+  shipIdentify,
+  dropToGameboard,
   dragOverListener
 } from "./dom";
 
 (() => {
-  // Creates players and boards
-  const player1 = player("player1");
-  const player2 = player("Computer");
+  // Places player2 ships on gameboard
+  player2.playerBoard.board[0][2] = player2Ships.battleship2;
+  player2.playerBoard.board[0][3] = player2Ships.battleship2;
+  player2.playerBoard.board[0][4] = player2Ships.battleship2;
+  player2.playerBoard.board[0][5] = player2Ships.battleship2;
 
-  // Creates player1 ships
-  const battleship1 = ship(4);
-  const destroyer11 = ship(3);
-  const destroyer12 = ship(3);
-  const submarine11 = ship(2);
-  const submarine12 = ship(2);
-  const submarine13 = ship(2);
-  const patrolBoat11 = ship(1);
-  const patrolBoat12 = ship(1);
-  const patrolBoat13 = ship(1);
-  const patrolBoat14 = ship(1);
+  player2.playerBoard.board[0][0] = player2Ships.submarine21;
+  player2.playerBoard.board[1][0] = player2Ships.submarine21;
 
-  // Creates player2 ships
-  const battleship2 = ship(4);
-  const destroyer21 = ship(3);
-  const destroyer22 = ship(3);
-  const submarine21 = ship(2);
-  const submarine22 = ship(2);
-  const submarine23 = ship(2);
-  const patrolBoat21 = ship(1);
-  const patrolBoat22 = ship(1);
-  const patrolBoat23 = ship(1);
-  const patrolBoat24 = ship(1);
+  player2.playerBoard.board[2][3] = player2Ships.submarine22;
+  player2.playerBoard.board[3][3] = player2Ships.submarine22;
 
-  // Places player1 ships on gameboard
-  // player1.playerBoard.board[0][2] = battleship1;
-  player1.playerBoard.board[0][3] = battleship1;
-  player1.playerBoard.board[0][4] = battleship1;
-  player1.playerBoard.board[0][5] = battleship1;
+  player2.playerBoard.board[7][8] = player2Ships.submarine23;
+  player2.playerBoard.board[7][9] = player2Ships.submarine23;
 
-  player1.playerBoard.board[0][0] = submarine11;
-  player1.playerBoard.board[1][0] = submarine11;
+  player2.playerBoard.board[5][3] = player2Ships.destroyer21;
+  player2.playerBoard.board[5][4] = player2Ships.destroyer21;
+  player2.playerBoard.board[5][5] = player2Ships.destroyer21;
 
-  player1.playerBoard.board[2][3] = submarine12;
-  player1.playerBoard.board[3][3] = submarine12;
+  player2.playerBoard.board[9][2] = player2Ships.destroyer22;
+  player2.playerBoard.board[9][3] = player2Ships.destroyer22;
+  player2.playerBoard.board[9][4] = player2Ships.destroyer22;
 
-  player1.playerBoard.board[7][8] = submarine13;
-  player1.playerBoard.board[7][9] = submarine13;
+  player2.playerBoard.board[1][8] = player2Ships.patrolBoat21;
 
-  player1.playerBoard.board[5][3] = destroyer11;
-  player1.playerBoard.board[5][4] = destroyer11;
-  player1.playerBoard.board[5][5] = destroyer11;
+  player2.playerBoard.board[2][5] = player2Ships.patrolBoat22;
 
-  player1.playerBoard.board[9][2] = destroyer12;
-  player1.playerBoard.board[9][3] = destroyer12;
-  player1.playerBoard.board[9][4] = destroyer12;
+  player2.playerBoard.board[3][9] = player2Ships.patrolBoat23;
 
-  player1.playerBoard.board[1][8] = patrolBoat11;
-
-  player1.playerBoard.board[2][5] = patrolBoat12;
-
-  player1.playerBoard.board[3][9] = patrolBoat13;
-
-  player1.playerBoard.board[7][5] = patrolBoat14;
-
-  // Places player1 ships on gameboard
-  player2.playerBoard.board[0][2] = battleship2;
-  player2.playerBoard.board[0][3] = battleship2;
-  player2.playerBoard.board[0][4] = battleship2;
-  player2.playerBoard.board[0][5] = battleship2;
-
-  player2.playerBoard.board[0][0] = submarine21;
-  player2.playerBoard.board[1][0] = submarine21;
-
-  player2.playerBoard.board[2][3] = submarine22;
-  player2.playerBoard.board[3][3] = submarine22;
-
-  player2.playerBoard.board[7][8] = submarine23;
-  player2.playerBoard.board[7][9] = submarine23;
-
-  player2.playerBoard.board[5][3] = destroyer21;
-  player2.playerBoard.board[5][4] = destroyer21;
-  player2.playerBoard.board[5][5] = destroyer21;
-
-  player2.playerBoard.board[9][2] = destroyer22;
-  player2.playerBoard.board[9][3] = destroyer22;
-  player2.playerBoard.board[9][4] = destroyer22;
-
-  player2.playerBoard.board[1][8] = patrolBoat21;
-
-  player2.playerBoard.board[2][5] = patrolBoat22;
-
-  player2.playerBoard.board[3][9] = patrolBoat23;
-
-  player2.playerBoard.board[7][5] = patrolBoat24;
+  player2.playerBoard.board[7][5] = player2Ships.patrolBoat24;
 
   // Displays player gameboards
   createTable(".p1Board", "p1Grid");
@@ -113,40 +55,120 @@ import {
     cell.addEventListener("drop", (event) => {
       const xCoord = Number(cell.dataset.x);
       const yCoord = Number(cell.dataset.y);
+      const shipIdentifier = shipIdentify(event);
 
       // Decides which direction is a valid move
-      if (player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "right")) {
-        if (player1.playerBoard.spaceBetween(xCoord, yCoord, 4, "right")) {
-          // *** drop(event) to run on valid move ***
-          console.log("magic to the right!");
+      if (
+        player1.playerBoard.enoughSpaces(
+          xCoord,
+          yCoord,
+          shipIdentifier.length,
+          "right"
+        )
+      ) {
+        if (
+          player1.playerBoard.spaceBetween(
+            xCoord,
+            yCoord,
+            shipIdentifier.length,
+            "right"
+          )
+        ) {
+          dropToGameboard(
+            event,
+            xCoord,
+            yCoord,
+            shipIdentifier.shipName,
+            shipIdentifier.length,
+            "right"
+          );
         }
       }
 
-      if (player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "left")) {
-        if (player1.playerBoard.spaceBetween(xCoord, yCoord, 4, "left")) {
-          // *** drop(event) to run on valid move ***
-          console.log("magic to the left!");
+      if (
+        player1.playerBoard.enoughSpaces(
+          xCoord,
+          yCoord,
+          shipIdentifier.length,
+          "left"
+        )
+      ) {
+        if (
+          player1.playerBoard.spaceBetween(
+            xCoord,
+            yCoord,
+            shipIdentifier.length,
+            "left"
+          )
+        ) {
+          dropToGameboard(
+            event,
+            xCoord,
+            yCoord,
+            shipIdentifier.shipName,
+            shipIdentifier.length,
+            "left"
+          );
         }
       }
 
-      if (player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "down")) {
-        if (player1.playerBoard.spaceBetween(xCoord, yCoord, 4, "down")) {
-          // *** drop(event) to run on valid move ***
-          console.log("magic to the down!");
+      if (
+        player1.playerBoard.enoughSpaces(
+          xCoord,
+          yCoord,
+          shipIdentifier.length,
+          "down"
+        )
+      ) {
+        if (
+          player1.playerBoard.spaceBetween(
+            xCoord,
+            yCoord,
+            shipIdentifier.length,
+            "down"
+          )
+        ) {
+          dropToGameboard(
+            event,
+            xCoord,
+            yCoord,
+            shipIdentifier.shipName,
+            shipIdentifier.length,
+            "down"
+          );
         }
       }
 
-      if (player1.playerBoard.enoughSpaces(xCoord, yCoord, 4, "up")) {
-        if (player1.playerBoard.spaceBetween(xCoord, yCoord, 4, "up")) {
-          // *** drop(event) to run on valid move ***
-          console.log("magic to the up!");
+      if (
+        player1.playerBoard.enoughSpaces(
+          xCoord,
+          yCoord,
+          shipIdentifier.length,
+          "up"
+        )
+      ) {
+        if (
+          player1.playerBoard.spaceBetween(
+            xCoord,
+            yCoord,
+            shipIdentifier.length,
+            "up"
+          )
+        ) {
+          dropToGameboard(
+            event,
+            xCoord,
+            yCoord,
+            shipIdentifier.shipName,
+            shipIdentifier.length,
+            "up"
+          );
         }
       }
+
+      player1.playerBoard.colorGameboardShips([0, 0]);
     });
   });
-
-  // Colors player grid squares that contain ships
-  player1.playerBoard.colorGameboardShips([0, 0]);
 
   // Determines which player goes first
   currentTurn.playerName = player1.name;
