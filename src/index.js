@@ -6,6 +6,7 @@ import {
   drag,
   shipIdentify,
   dropToGameboard,
+  removeShip,
   dragOver
 } from "./dom";
 
@@ -86,6 +87,8 @@ import {
             shipIdentifier.length,
             "right"
           );
+
+          removeShip(`#${shipIdentifier.shipName}`);
         }
       }
 
@@ -113,6 +116,8 @@ import {
             shipIdentifier.length,
             "left"
           );
+
+          removeShip(`#${shipIdentifier.shipName}`);
         }
       }
 
@@ -140,6 +145,8 @@ import {
             shipIdentifier.length,
             "down"
           );
+
+          removeShip(`#${shipIdentifier.shipName}`);
         }
       }
 
@@ -167,6 +174,8 @@ import {
             shipIdentifier.length,
             "up"
           );
+
+          removeShip(`#${shipIdentifier.shipName}`);
         }
       }
 
