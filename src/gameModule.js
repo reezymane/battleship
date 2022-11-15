@@ -3,30 +3,6 @@
 /* eslint-disable no-plusplus */
 import { currentTurn } from "./factories";
 
-// Returns ship length
-const shipLength = (shipName) => {
-  const battleship = /^[battleship]/;
-  const destroyer = /^[destroyer]/;
-  const submarine = /^[submarine]/;
-  const patrolBoat = /^[patrolBoat]/;
-
-  if (shipName.match(battleship)) {
-    return 4;
-  }
-
-  if (shipName.match(destroyer)) {
-    return 3;
-  }
-
-  if (shipName.match(submarine)) {
-    return 2;
-  }
-
-  if (shipName.match(patrolBoat)) {
-    return 1;
-  }
-};
-
 // Checks if coordinate has been clicked already
 const wasCoordinateClicked = (playerAttacking, [x, y]) => {
   for (let i = 0; i < playerAttacking.markedSpots.length; i++) {
@@ -181,10 +157,4 @@ const playerWin = (playerAttacking, receivingAttack, controller) => {
   }
 };
 
-export {
-  wasCoordinateClicked,
-  whoseTurn,
-  playerWin,
-  computerClick,
-  shipLength
-};
+export { wasCoordinateClicked, whoseTurn, playerWin, computerClick };

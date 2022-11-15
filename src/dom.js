@@ -1,7 +1,14 @@
 /* eslint-disable import/no-cycle */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
-import { currentTurn } from "./factories";
+/* eslint-disable consistent-return */
+import {
+  currentTurn,
+  player1,
+  player2,
+  player1Ships,
+  player2Ships
+} from "./factories";
 import {
   wasCoordinateClicked,
   whoseTurn,
@@ -26,10 +33,29 @@ const dragOver = (ev) => {
 };
 
 // ***DOES ACTIONs*** when item is dropped
-const drop = (ev) => {
+const droppedLength = (ev) => {
   ev.preventDefault();
   const data = ev.dataTransfer.getData("text");
-  return data;
+  const battleship = /^[battleship]/;
+  const destroyer = /^[destroyer]/;
+  const submarine = /^[submarine]/;
+  const patrolBoat = /^[patrolBoat]/;
+
+  if (data.match(battleship)) {
+    return 4;
+  }
+
+  if (data.match(destroyer)) {
+    return 3;
+  }
+
+  if (data.match(submarine)) {
+    return 2;
+  }
+
+  if (data.match(patrolBoat)) {
+    return 1;
+  }
 };
 
 // Cells listen for items to be dragged over
@@ -163,6 +189,6 @@ export {
   colorCoordinate,
   clickAttack,
   dragListener,
-  drop,
+  droppedLength,
   dragOverListener
 };
