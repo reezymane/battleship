@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable import/no-cycle */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
@@ -32,29 +33,72 @@ const dragOver = (ev) => {
   ev.preventDefault();
 };
 
-// ***DOES ACTIONs*** when item is dropped
-const droppedLength = (ev) => {
+// Returns length of the ship being dropped
+const shipIdentify = (ev) => {
   ev.preventDefault();
   const data = ev.dataTransfer.getData("text");
-  const battleship = /^[battleship]/;
-  const destroyer = /^[destroyer]/;
-  const submarine = /^[submarine]/;
-  const patrolBoat = /^[patrolBoat]/;
+  let length;
 
-  if (data.match(battleship)) {
-    return 4;
+  if (data.includes("battleship")) {
+    length = 4;
   }
 
-  if (data.match(destroyer)) {
-    return 3;
+  if (data.includes("destroyer")) {
+    length = 3;
   }
 
-  if (data.match(submarine)) {
-    return 2;
+  if (data.includes("submarine")) {
+    length = 2;
   }
 
-  if (data.match(patrolBoat)) {
-    return 1;
+  if (data.includes("patrolBoat")) {
+    length = 1;
+  }
+
+  return { shipName: data, length };
+};
+
+// Adds dropped ships to player gameboard
+const dropToGameboard = (ev, x, y, shipLength, direction) => {
+  ev.preventDefault();
+
+  if (direction === "right") {
+    for (let i = 0; i < shipLength; i++) {
+      // iterate through player1ships
+      // if key matches shipName
+      // add player1Ships.key to board
+      for (const [key, value] of Object.entries(player1Ships)) {
+        if (key) {
+        }
+      }
+      player1.playerBoard.board[x][y] = {};
+      y++;
+      console.log(player1.playerBoard.board);
+    }
+  }
+
+  if (direction === "left") {
+    for (let i = 0; i < shipLength; i++) {
+      player1.playerBoard.board[x][y] = {};
+      y--;
+      console.log(player1.playerBoard.board);
+    }
+  }
+
+  if (direction === "down") {
+    for (let i = 0; i < shipLength; i++) {
+      player1.playerBoard.board[x][y] = {};
+      x++;
+      console.log(player1.playerBoard.board);
+    }
+  }
+
+  if (direction === "up") {
+    for (let i = 0; i < shipLength; i++) {
+      player1.playerBoard.board[x][y] = {};
+      x--;
+      console.log(player1.playerBoard.board);
+    }
   }
 };
 
@@ -189,6 +233,7 @@ export {
   colorCoordinate,
   clickAttack,
   dragListener,
-  droppedLength,
+  shipIdentify,
+  dropToGameboard,
   dragOverListener
 };
