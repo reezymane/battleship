@@ -3,13 +3,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
 /* eslint-disable consistent-return */
-import {
-  currentTurn,
-  player1,
-  player2,
-  player1Ships,
-  player2Ships
-} from "./factories";
+import { currentTurn, player1, player1Ships } from "./factories";
 import {
   wasCoordinateClicked,
   whoseTurn,

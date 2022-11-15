@@ -1,5 +1,5 @@
 import "./style.css";
-import { currentTurn, player1, player2, player2Ships } from "./factories";
+import { currentTurn, player1, player2 } from "./factories";
 import {
   createTable,
   clickAttack,
@@ -9,38 +9,11 @@ import {
   removeShip,
   dragOver
 } from "./dom";
+import { placeComputerShips } from "./gameModule";
 
 (() => {
   // Places player2 ships on gameboard
-  player2.playerBoard.board[0][2] = player2Ships.battleship2;
-  player2.playerBoard.board[0][3] = player2Ships.battleship2;
-  player2.playerBoard.board[0][4] = player2Ships.battleship2;
-  player2.playerBoard.board[0][5] = player2Ships.battleship2;
-
-  player2.playerBoard.board[0][0] = player2Ships.submarine21;
-  player2.playerBoard.board[1][0] = player2Ships.submarine21;
-
-  player2.playerBoard.board[2][3] = player2Ships.submarine22;
-  player2.playerBoard.board[3][3] = player2Ships.submarine22;
-
-  player2.playerBoard.board[7][8] = player2Ships.submarine23;
-  player2.playerBoard.board[7][9] = player2Ships.submarine23;
-
-  player2.playerBoard.board[5][3] = player2Ships.destroyer21;
-  player2.playerBoard.board[5][4] = player2Ships.destroyer21;
-  player2.playerBoard.board[5][5] = player2Ships.destroyer21;
-
-  player2.playerBoard.board[9][2] = player2Ships.destroyer22;
-  player2.playerBoard.board[9][3] = player2Ships.destroyer22;
-  player2.playerBoard.board[9][4] = player2Ships.destroyer22;
-
-  player2.playerBoard.board[1][8] = player2Ships.patrolBoat21;
-
-  player2.playerBoard.board[2][5] = player2Ships.patrolBoat22;
-
-  player2.playerBoard.board[3][9] = player2Ships.patrolBoat23;
-
-  player2.playerBoard.board[7][5] = player2Ships.patrolBoat24;
+  placeComputerShips();
 
   // Displays player gameboards
   createTable(".p1Board", "p1Grid");

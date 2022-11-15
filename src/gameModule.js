@@ -1,7 +1,64 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable import/no-cycle */
 /* eslint-disable consistent-return */
 /* eslint-disable no-plusplus */
-import { currentTurn } from "./factories";
+import { currentTurn, player2, player2Ships } from "./factories";
+
+// Verifies valid ship placement
+const validPlacement = (randomX, randomY, value) => {
+  let x = randomX;
+  let y = randomY;
+
+  if (
+    player2.playerBoard.enoughSpaces(randomX, randomY, value.length, "right") &&
+    player2.playerBoard.spaceBetween(randomX, randomY, value.length, "right")
+  ) {
+    for (let i = 0; i < value.length; i++) {
+      player2.playerBoard.board[x][y] = value;
+      y++;
+    }
+  } else if (
+    player2.playerBoard.enoughSpaces(randomX, randomY, value.length, "left") &&
+    player2.playerBoard.spaceBetween(randomX, randomY, value.length, "left")
+  ) {
+    for (let i = 0; i < value.length; i++) {
+      player2.playerBoard.board[x][y] = value;
+      y--;
+    }
+  } else if (
+    player2.playerBoard.enoughSpaces(randomX, randomY, value.length, "down") &&
+    player2.playerBoard.spaceBetween(randomX, randomY, value.length, "down")
+  ) {
+    for (let i = 0; i < value.length; i++) {
+      player2.playerBoard.board[x][y] = value;
+      x++;
+    }
+  } else if (
+    player2.playerBoard.enoughSpaces(randomX, randomY, value.length, "up") &&
+    player2.playerBoard.spaceBetween(randomX, randomY, value.length, "up")
+  ) {
+    for (let i = 0; i < value.length; i++) {
+      player2.playerBoard.board[x][y] = value;
+      x--;
+    }
+  } else {
+    x = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
+    y = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
+
+    validPlacement(x, y, value);
+  }
+};
+
+// Chooses random placement for Computer ships
+const placeComputerShips = () => {
+  // eslint-disable-next-line no-unused-vars
+  for (const [key, value] of Object.entries(player2Ships)) {
+    const randomX = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
+    const randomY = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
+
+    validPlacement(randomX, randomY, value);
+  }
+};
 
 // Checks if coordinate has been clicked already
 const wasCoordinateClicked = (playerAttacking, [x, y]) => {
@@ -157,4 +214,10 @@ const playerWin = (playerAttacking, receivingAttack, controller) => {
   }
 };
 
-export { wasCoordinateClicked, whoseTurn, playerWin, computerClick };
+export {
+  placeComputerShips,
+  wasCoordinateClicked,
+  whoseTurn,
+  playerWin,
+  computerClick
+};
