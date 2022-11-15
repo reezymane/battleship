@@ -22,12 +22,6 @@ const drag = (ev) => {
   ev.dataTransfer.setData("text", ev.target.id);
 };
 
-// Stores ***INFO*** when drag starts
-const dragListener = (shipID) => {
-  const ship = document.querySelector(shipID);
-  ship.addEventListener("dragstart", drag);
-};
-
 // Prevents the browser default handling of the data
 const dragOver = (ev) => {
   ev.preventDefault();
@@ -106,14 +100,6 @@ const dropToGameboard = (ev, x, y, shipName, shipLength, direction) => {
       }
     }
   }
-};
-
-// Cells listen for items to be dragged over
-const dragOverListener = () => {
-  const gridCells = document.querySelectorAll(".p1Grid .cell");
-  gridCells.forEach((cell) => {
-    cell.addEventListener("dragover", dragOver);
-  });
 };
 
 // Creates the first row of the table and names columns
@@ -238,8 +224,8 @@ export {
   createTable,
   colorCoordinate,
   clickAttack,
-  dragListener,
+  drag,
   shipIdentify,
   dropToGameboard,
-  dragOverListener
+  dragOver
 };

@@ -3,10 +3,10 @@ import { currentTurn, player1, player2, player2Ships } from "./factories";
 import {
   createTable,
   clickAttack,
-  dragListener,
+  drag,
   shipIdentify,
   dropToGameboard,
-  dragOverListener
+  dragOver
 } from "./dom";
 
 (() => {
@@ -46,12 +46,16 @@ import {
   createTable(".p2Board", "p2Grid");
 
   // Makes ship divs draggable
-  dragListener("#battleship1");
-  dragOverListener();
+  const ship = document.querySelectorAll(".shipOuter div");
+  ship.forEach((div) => {
+    div.addEventListener("dragstart", drag);
+  });
 
   // Adds dropped ship to gameboard in player object and interface
   const gridCells = document.querySelectorAll(".p1Grid .cell");
   gridCells.forEach((cell) => {
+    cell.addEventListener("dragover", dragOver);
+
     cell.addEventListener("drop", (event) => {
       const xCoord = Number(cell.dataset.x);
       const yCoord = Number(cell.dataset.y);
