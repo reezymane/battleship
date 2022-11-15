@@ -213,4 +213,46 @@ const currentTurn = {
   playerName: null
 };
 
-export { ship, player, currentTurn, gameboard, hitOrMiss };
+// Creates players and boards
+const player1 = player("player1");
+const player2 = player("Computer");
+
+// Creates player1 ships
+const player1Ships = {
+  battleship1: ship(4),
+  destroyer11: ship(3),
+  destroyer12: ship(3),
+  submarine11: ship(2),
+  submarine12: ship(2),
+  submarine13: ship(2),
+  patrolBoat11: ship(1),
+  patrolBoat12: ship(1),
+  patrolBoat13: ship(1),
+  patrolBoat14: ship(1)
+};
+
+// Creates player2 ships
+const player2Ships = {
+  battleship2: ship(4),
+  destroyer21: ship(3),
+  destroyer22: ship(3),
+  submarine21: ship(2),
+  submarine22: ship(2),
+  submarine23: ship(2),
+  patrolBoat21: ship(1),
+  patrolBoat22: ship(1),
+  patrolBoat23: ship(1),
+  patrolBoat24: ship(1)
+};
+
+export {
+  ship,
+  player,
+  currentTurn,
+  gameboard,
+  hitOrMiss,
+  player1,
+  player2,
+  player1Ships,
+  player2Ships
+};
