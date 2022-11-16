@@ -41,35 +41,24 @@ const validPlacement = (player, xCoord, yCoord, length) => {
 const validComputerPlacement = (randomX, randomY, value) => {
   let x = randomX;
   let y = randomY;
+  const validDirection = validPlacement(player2, x, y, value.length);
 
-  if (
-    player2.playerBoard.enoughSpaces(randomX, randomY, value.length, "right") &&
-    player2.playerBoard.spaceBetween(randomX, randomY, value.length, "right")
-  ) {
+  if (validDirection === "right") {
     for (let i = 0; i < value.length; i++) {
       player2.playerBoard.board[x][y] = value;
       y++;
     }
-  } else if (
-    player2.playerBoard.enoughSpaces(randomX, randomY, value.length, "left") &&
-    player2.playerBoard.spaceBetween(randomX, randomY, value.length, "left")
-  ) {
+  } else if (validDirection === "left") {
     for (let i = 0; i < value.length; i++) {
       player2.playerBoard.board[x][y] = value;
       y--;
     }
-  } else if (
-    player2.playerBoard.enoughSpaces(randomX, randomY, value.length, "down") &&
-    player2.playerBoard.spaceBetween(randomX, randomY, value.length, "down")
-  ) {
+  } else if (validDirection === "down") {
     for (let i = 0; i < value.length; i++) {
       player2.playerBoard.board[x][y] = value;
       x++;
     }
-  } else if (
-    player2.playerBoard.enoughSpaces(randomX, randomY, value.length, "up") &&
-    player2.playerBoard.spaceBetween(randomX, randomY, value.length, "up")
-  ) {
+  } else if (validDirection === "up") {
     for (let i = 0; i < value.length; i++) {
       player2.playerBoard.board[x][y] = value;
       x--;
