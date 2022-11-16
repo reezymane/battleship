@@ -35,34 +35,31 @@ import { placeComputerShips } from "./gameModule";
       const yCoord = Number(cell.dataset.y);
       const shipIdentifier = shipIdentify(event);
 
-      // Decides which direction is a valid move
+      // Decides which direction is a valid placement
       if (
         player1.playerBoard.enoughSpaces(
           xCoord,
           yCoord,
           shipIdentifier.length,
           "right"
+        ) &&
+        player1.playerBoard.spaceBetween(
+          xCoord,
+          yCoord,
+          shipIdentifier.length,
+          "right"
         )
       ) {
-        if (
-          player1.playerBoard.spaceBetween(
-            xCoord,
-            yCoord,
-            shipIdentifier.length,
-            "right"
-          )
-        ) {
-          dropToGameboard(
-            event,
-            xCoord,
-            yCoord,
-            shipIdentifier.shipName,
-            shipIdentifier.length,
-            "right"
-          );
+        dropToGameboard(
+          event,
+          xCoord,
+          yCoord,
+          shipIdentifier.shipName,
+          shipIdentifier.length,
+          "right"
+        );
 
-          removeShip(`#${shipIdentifier.shipName}`);
-        }
+        removeShip(`#${shipIdentifier.shipName}`);
       }
 
       if (
@@ -71,27 +68,24 @@ import { placeComputerShips } from "./gameModule";
           yCoord,
           shipIdentifier.length,
           "left"
+        ) &&
+        player1.playerBoard.spaceBetween(
+          xCoord,
+          yCoord,
+          shipIdentifier.length,
+          "left"
         )
       ) {
-        if (
-          player1.playerBoard.spaceBetween(
-            xCoord,
-            yCoord,
-            shipIdentifier.length,
-            "left"
-          )
-        ) {
-          dropToGameboard(
-            event,
-            xCoord,
-            yCoord,
-            shipIdentifier.shipName,
-            shipIdentifier.length,
-            "left"
-          );
+        dropToGameboard(
+          event,
+          xCoord,
+          yCoord,
+          shipIdentifier.shipName,
+          shipIdentifier.length,
+          "left"
+        );
 
-          removeShip(`#${shipIdentifier.shipName}`);
-        }
+        removeShip(`#${shipIdentifier.shipName}`);
       }
 
       if (
@@ -100,27 +94,24 @@ import { placeComputerShips } from "./gameModule";
           yCoord,
           shipIdentifier.length,
           "down"
+        ) &&
+        player1.playerBoard.spaceBetween(
+          xCoord,
+          yCoord,
+          shipIdentifier.length,
+          "down"
         )
       ) {
-        if (
-          player1.playerBoard.spaceBetween(
-            xCoord,
-            yCoord,
-            shipIdentifier.length,
-            "down"
-          )
-        ) {
-          dropToGameboard(
-            event,
-            xCoord,
-            yCoord,
-            shipIdentifier.shipName,
-            shipIdentifier.length,
-            "down"
-          );
+        dropToGameboard(
+          event,
+          xCoord,
+          yCoord,
+          shipIdentifier.shipName,
+          shipIdentifier.length,
+          "down"
+        );
 
-          removeShip(`#${shipIdentifier.shipName}`);
-        }
+        removeShip(`#${shipIdentifier.shipName}`);
       }
 
       if (
@@ -129,27 +120,24 @@ import { placeComputerShips } from "./gameModule";
           yCoord,
           shipIdentifier.length,
           "up"
+        ) &&
+        player1.playerBoard.spaceBetween(
+          xCoord,
+          yCoord,
+          shipIdentifier.length,
+          "up"
         )
       ) {
-        if (
-          player1.playerBoard.spaceBetween(
-            xCoord,
-            yCoord,
-            shipIdentifier.length,
-            "up"
-          )
-        ) {
-          dropToGameboard(
-            event,
-            xCoord,
-            yCoord,
-            shipIdentifier.shipName,
-            shipIdentifier.length,
-            "up"
-          );
+        dropToGameboard(
+          event,
+          xCoord,
+          yCoord,
+          shipIdentifier.shipName,
+          shipIdentifier.length,
+          "up"
+        );
 
-          removeShip(`#${shipIdentifier.shipName}`);
-        }
+        removeShip(`#${shipIdentifier.shipName}`);
       }
 
       player1.playerBoard.colorGameboardShips([0, 0]);

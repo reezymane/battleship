@@ -4,7 +4,7 @@
 /* eslint-disable no-plusplus */
 import { currentTurn, player2, player2Ships } from "./factories";
 
-// Verifies valid ship placement
+// Verifies valid ship placement for Computer
 const validPlacement = (randomX, randomY, value) => {
   let x = randomX;
   let y = randomY;
