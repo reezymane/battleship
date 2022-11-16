@@ -4,8 +4,41 @@
 /* eslint-disable no-plusplus */
 import { currentTurn, player2, player2Ships } from "./factories";
 
-// Verifies valid ship placement for Computer
-const validPlacement = (randomX, randomY, value) => {
+// Verifies valid ship placement
+const validPlacement = (player, xCoord, yCoord, length) => {
+  if (
+    player.playerBoard.enoughSpaces(xCoord, yCoord, length, "right") &&
+    player.playerBoard.spaceBetween(xCoord, yCoord, length, "right")
+  ) {
+    return "right";
+  }
+
+  if (
+    player.playerBoard.enoughSpaces(xCoord, yCoord, length, "left") &&
+    player.playerBoard.spaceBetween(xCoord, yCoord, length, "left")
+  ) {
+    return "left";
+  }
+
+  if (
+    player.playerBoard.enoughSpaces(xCoord, yCoord, length, "down") &&
+    player.playerBoard.spaceBetween(xCoord, yCoord, length, "down")
+  ) {
+    return "down";
+  }
+
+  if (
+    player.playerBoard.enoughSpaces(xCoord, yCoord, length, "up") &&
+    player.playerBoard.spaceBetween(xCoord, yCoord, length, "up")
+  ) {
+    return "up";
+  }
+
+  return null;
+};
+
+// Chooses new coordinate if computer ship placement is invalid
+const validComputerPlacement = (randomX, randomY, value) => {
   let x = randomX;
   let y = randomY;
 
@@ -45,7 +78,7 @@ const validPlacement = (randomX, randomY, value) => {
     x = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
     y = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
 
-    validPlacement(x, y, value);
+    validComputerPlacement(x, y, value);
   }
 };
 
@@ -56,7 +89,7 @@ const placeComputerShips = () => {
     const randomX = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
     const randomY = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
 
-    validPlacement(randomX, randomY, value);
+    validComputerPlacement(randomX, randomY, value);
   }
 };
 
@@ -215,6 +248,7 @@ const playerWin = (playerAttacking, receivingAttack, controller) => {
 };
 
 export {
+  validPlacement,
   placeComputerShips,
   wasCoordinateClicked,
   whoseTurn,

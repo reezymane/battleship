@@ -12,7 +12,7 @@ import {
 } from "./gameModule";
 import dragIcon from "./img/dragIcon.png";
 
-// Allows ships to be dragged and makes div opaque
+// Sets ghost image, stores div ID, and makes div opaque
 const drag = (ev, div) => {
   const img = new Image();
   img.src = dragIcon;

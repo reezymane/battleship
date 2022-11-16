@@ -10,7 +10,7 @@ import {
   dragOver,
   dragEnd
 } from "./dom";
-import { placeComputerShips } from "./gameModule";
+import { placeComputerShips, validPlacement } from "./gameModule";
 
 (() => {
   // Places player2 ships on gameboard
@@ -41,107 +41,21 @@ import { placeComputerShips } from "./gameModule";
       const xCoord = Number(cell.dataset.x);
       const yCoord = Number(cell.dataset.y);
       const shipIdentifier = shipIdentify(event);
+      const validDirection = validPlacement(
+        player1,
+        xCoord,
+        yCoord,
+        shipIdentifier.length
+      );
 
-      // Decides which direction is a valid placement
-      if (
-        player1.playerBoard.enoughSpaces(
-          xCoord,
-          yCoord,
-          shipIdentifier.length,
-          "right"
-        ) &&
-        player1.playerBoard.spaceBetween(
-          xCoord,
-          yCoord,
-          shipIdentifier.length,
-          "right"
-        )
-      ) {
+      if (validDirection != null) {
         dropToGameboard(
           event,
           xCoord,
           yCoord,
           shipIdentifier.shipName,
           shipIdentifier.length,
-          "right"
-        );
-
-        removeShip(`#${shipIdentifier.shipName}`);
-      }
-
-      if (
-        player1.playerBoard.enoughSpaces(
-          xCoord,
-          yCoord,
-          shipIdentifier.length,
-          "left"
-        ) &&
-        player1.playerBoard.spaceBetween(
-          xCoord,
-          yCoord,
-          shipIdentifier.length,
-          "left"
-        )
-      ) {
-        dropToGameboard(
-          event,
-          xCoord,
-          yCoord,
-          shipIdentifier.shipName,
-          shipIdentifier.length,
-          "left"
-        );
-
-        removeShip(`#${shipIdentifier.shipName}`);
-      }
-
-      if (
-        player1.playerBoard.enoughSpaces(
-          xCoord,
-          yCoord,
-          shipIdentifier.length,
-          "down"
-        ) &&
-        player1.playerBoard.spaceBetween(
-          xCoord,
-          yCoord,
-          shipIdentifier.length,
-          "down"
-        )
-      ) {
-        dropToGameboard(
-          event,
-          xCoord,
-          yCoord,
-          shipIdentifier.shipName,
-          shipIdentifier.length,
-          "down"
-        );
-
-        removeShip(`#${shipIdentifier.shipName}`);
-      }
-
-      if (
-        player1.playerBoard.enoughSpaces(
-          xCoord,
-          yCoord,
-          shipIdentifier.length,
-          "up"
-        ) &&
-        player1.playerBoard.spaceBetween(
-          xCoord,
-          yCoord,
-          shipIdentifier.length,
-          "up"
-        )
-      ) {
-        dropToGameboard(
-          event,
-          xCoord,
-          yCoord,
-          shipIdentifier.shipName,
-          shipIdentifier.length,
-          "up"
+          validDirection
         );
 
         removeShip(`#${shipIdentifier.shipName}`);
