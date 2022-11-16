@@ -7,7 +7,8 @@ import {
   shipIdentify,
   dropToGameboard,
   removeShip,
-  dragOver
+  dragOver,
+  dragEnd
 } from "./dom";
 import { placeComputerShips } from "./gameModule";
 
@@ -22,7 +23,13 @@ import { placeComputerShips } from "./gameModule";
   // Makes ship divs draggable
   const ship = document.querySelectorAll(".shipOuter div");
   ship.forEach((div) => {
-    div.addEventListener("dragstart", drag);
+    div.addEventListener("dragstart", (event) => {
+      drag(event, div);
+    });
+
+    div.addEventListener("dragend", (event) => {
+      dragEnd(event, div);
+    });
   });
 
   // Adds dropped ship to gameboard in player object and interface

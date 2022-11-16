@@ -11,9 +11,15 @@ import {
   computerClick
 } from "./gameModule";
 
-// Allows ships to be dragged
-const drag = (ev) => {
+// Allows ships to be dragged and makes div opaque
+const drag = (ev, div) => {
   ev.dataTransfer.setData("text", ev.target.id);
+  div.style.opacity = "0.4";
+};
+
+// Restores opacity when drag ends
+const dragEnd = (ev, div) => {
+  div.style.opacity = "1";
 };
 
 // Prevents the browser default handling of the data
@@ -229,5 +235,6 @@ export {
   shipIdentify,
   dropToGameboard,
   removeShip,
-  dragOver
+  dragOver,
+  dragEnd
 };
