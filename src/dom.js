@@ -10,10 +10,16 @@ import {
   playerWin,
   computerClick
 } from "./gameModule";
+import dragIcon from "./img/dragIcon.png";
 
 // Allows ships to be dragged and makes div opaque
 const drag = (ev, div) => {
+  const img = new Image();
+  img.src = dragIcon;
+
+  ev.dataTransfer.setDragImage(img, -30, -30);
   ev.dataTransfer.setData("text", ev.target.id);
+
   div.style.opacity = "0.4";
 };
 
