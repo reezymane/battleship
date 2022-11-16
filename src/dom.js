@@ -23,6 +23,10 @@ const drag = (ev, div) => {
   div.style.opacity = "0.4";
 };
 
+const dragOver = (ev) => {
+  ev.preventDefault();
+};
+
 // Restores opacity when drag ends
 const dragEnd = (div) => {
   div.style.opacity = "1";
@@ -233,6 +237,7 @@ export {
   colorCoordinate,
   clickAttack,
   drag,
+  dragOver,
   shipIdentify,
   dropToGameboard,
   removeShip,

@@ -5,6 +5,7 @@ import {
   createTable,
   clickAttack,
   drag,
+  dragOver,
   shipIdentify,
   dropToGameboard,
   removeShip,
@@ -34,6 +35,8 @@ import {
   // Adds dropped ship to gameboard in player object and interface
   const gridCells = document.querySelectorAll(".p1Grid .cell");
   gridCells.forEach((cell) => {
+    cell.addEventListener("dragover", dragOver);
+
     cell.addEventListener("drop", (event) => {
       const xCoord = Number(cell.dataset.x);
       const yCoord = Number(cell.dataset.y);
