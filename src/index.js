@@ -1,5 +1,6 @@
 import "./style.css";
 import { currentTurn, player1, player2 } from "./factories";
+import { placeComputerShips, validPlacement } from "./gameModule";
 import {
   createTable,
   clickAttack,
@@ -7,10 +8,8 @@ import {
   shipIdentify,
   dropToGameboard,
   removeShip,
-  dragOver,
   dragEnd
 } from "./dom";
-import { placeComputerShips, validPlacement } from "./gameModule";
 
 (() => {
   // Places player2 ships on gameboard
@@ -27,16 +26,14 @@ import { placeComputerShips, validPlacement } from "./gameModule";
       drag(event, div);
     });
 
-    div.addEventListener("dragend", (event) => {
-      dragEnd(event, div);
+    div.addEventListener("dragend", () => {
+      dragEnd(div);
     });
   });
 
   // Adds dropped ship to gameboard in player object and interface
   const gridCells = document.querySelectorAll(".p1Grid .cell");
   gridCells.forEach((cell) => {
-    cell.addEventListener("dragover", dragOver);
-
     cell.addEventListener("drop", (event) => {
       const xCoord = Number(cell.dataset.x);
       const yCoord = Number(cell.dataset.y);

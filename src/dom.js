@@ -24,13 +24,8 @@ const drag = (ev, div) => {
 };
 
 // Restores opacity when drag ends
-const dragEnd = (ev, div) => {
+const dragEnd = (div) => {
   div.style.opacity = "1";
-};
-
-// Prevents the browser default handling of the data
-const dragOver = (ev) => {
-  ev.preventDefault();
 };
 
 // Returns length of the ship being dropped
@@ -241,6 +236,5 @@ export {
   shipIdentify,
   dropToGameboard,
   removeShip,
-  dragOver,
   dragEnd
 };

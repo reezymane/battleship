@@ -117,7 +117,7 @@ const whoIsComputer = (playerAttacking, receivingAttack) => {
   }
 };
 
-// Selects correct cell to click
+// Selects correct cell and clicks it
 const correctCell = (x, y) => {
   const coordinate = document.querySelectorAll(".p1Grid .cell");
   coordinate.forEach((cell) => {
