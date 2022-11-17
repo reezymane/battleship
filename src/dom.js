@@ -200,6 +200,17 @@ const colorOnAttack = (cell, hitStatus) => {
   }
 };
 
+// Removes cell color and text
+const resetCell = () => {
+  const gridCells = document.querySelectorAll(".cell");
+  gridCells.forEach((cell) => {
+    cell.style.backgroundColor = "transparent";
+    cell.style.border = "1px solid white";
+    cell.style.color = "initial";
+    cell.textContent = "";
+  });
+};
+
 // Attacks gameboard and checks ships when coordinate clicked
 const clickAttack = (
   playerAttacking,
@@ -248,6 +259,7 @@ export {
   shipIdentify,
   dropToGameboard,
   hideShip,
+  resetCell,
   shipsDeployed,
   dragEnd
 };
