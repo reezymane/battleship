@@ -9,6 +9,7 @@ import {
   shipIdentify,
   dropToGameboard,
   hideShip,
+  shipsDeployed,
   dragEnd
 } from "./dom";
 
@@ -71,6 +72,11 @@ import {
   // Creates gameboard eventlisteners and abort signal
   const controller = new AbortController();
 
+  // Clicking start activates gameboard listeners to start game
+  const start = document.querySelector(".startButton");
+  start.addEventListener("click", () => {
+    console.log(shipsDeployed());
+  });
   clickAttack(player1, player2, ".p2Grid", controller);
   clickAttack(player2, player1, ".p1Grid", controller);
 })();

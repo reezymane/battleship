@@ -109,6 +109,18 @@ const hideShip = (shipID) => {
   shipToHide.style.display = "none";
 };
 
+// Checks if all ships have been placed
+const shipsDeployed = () => {
+  const ships = document.querySelectorAll(".shipOuter div");
+  for (let i = 0; i < ships.length; i++) {
+    if (ships[i].style.display !== "none") {
+      return false;
+    }
+  }
+
+  return true;
+};
+
 // Creates the first row of the table and names columns
 const createColumnHeadings = (tableClass) => {
   const grid = document.querySelector(`.${tableClass}`);
@@ -236,5 +248,6 @@ export {
   shipIdentify,
   dropToGameboard,
   hideShip,
+  shipsDeployed,
   dragEnd
 };
