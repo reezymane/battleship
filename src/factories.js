@@ -232,7 +232,12 @@ const gameboard = () => ({
 const player = (name) => ({
   name,
   playerBoard: gameboard(),
-  markedSpots: []
+  markedSpots: [],
+  clearMarkedSpots() {
+    while (this.markedSpots.length > 0) {
+      this.markedSpots.pop();
+    }
+  }
 });
 
 // Dynamic object to track player turns
@@ -272,6 +277,11 @@ const player2Ships = {
   patrolBoat24: ship(1)
 };
 
+// Dynamic on/off switch for board event listeners
+const onOff = {
+  status: null
+};
+
 export {
   ship,
   player,
@@ -281,5 +291,6 @@ export {
   player1,
   player2,
   player1Ships,
-  player2Ships
+  player2Ships,
+  onOff
 };

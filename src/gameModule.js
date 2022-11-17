@@ -2,7 +2,7 @@
 /* eslint-disable import/no-cycle */
 /* eslint-disable consistent-return */
 /* eslint-disable no-plusplus */
-import { currentTurn, player2, player2Ships } from "./factories";
+import { currentTurn, player2, player2Ships, onOff } from "./factories";
 
 // Verifies valid ship placement
 const validPlacement = (player, xCoord, yCoord, length) => {
@@ -228,9 +228,9 @@ const displayWinner = (playerAttacking) => {
 };
 
 // Ends game and displays winner
-const playerWin = (playerAttacking, receivingAttack, controller) => {
+const playerWin = (playerAttacking, receivingAttack) => {
   if (receivingAttack.playerBoard.allSunk([0, 0])) {
-    controller.abort();
+    onOff.status = "off";
 
     displayWinner(playerAttacking);
   }

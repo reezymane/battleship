@@ -6,7 +6,8 @@ import {
   player1,
   player1Ships,
   player2,
-  player2Ships
+  player2Ships,
+  onOff
 } from "./factories";
 import {
   createTable,
@@ -74,23 +75,17 @@ import {
     });
   });
 
-  // Abort signal for gameboards
-  const controller = new AbortController();
-
-  // On/Off switch for start button
-  let onOff = 0;
-
   // Clicking start activates gameboard listeners to start game
   const start = document.querySelector(".startButton");
   start.addEventListener("click", () => {
-    if (shipsDeployed() && onOff === 0) {
+    if (shipsDeployed()) {
       // Determines which player goes first
       currentTurn.playerName = player1.name;
 
-      clickAttack(player1, player2, ".p2Grid", controller);
-      clickAttack(player2, player1, ".p1Grid", controller);
+      clickAttack(player1, player2, ".p2Grid");
+      clickAttack(player2, player1, ".p1Grid");
 
-      onOff++;
+      onOff.status = "on";
     }
   });
 
@@ -122,6 +117,9 @@ import {
     player1.playerBoard.clearBoard([0, 0]);
     player2.playerBoard.clearBoard([0, 0]);
 
+    player1.clearMarkedSpots();
+    player2.clearMarkedSpots();
+
     resetCell();
 
     ship.forEach((div) => {
@@ -130,10 +128,6 @@ import {
 
     placeComputerShips();
 
-    controller.abort();
-
-    if (onOff > 0) {
-      onOff = 0;
-    }
+    onOff.status = "off";
   });
 })();

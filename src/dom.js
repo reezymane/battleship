@@ -3,7 +3,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
 /* eslint-disable consistent-return */
-import { currentTurn, player1, player1Ships } from "./factories";
+import { currentTurn, player1, player1Ships, onOff } from "./factories";
 import {
   wasCoordinateClicked,
   whoseTurn,
@@ -212,41 +212,35 @@ const resetCell = () => {
 };
 
 // Attacks gameboard and checks ships when coordinate clicked
-const clickAttack = (
-  playerAttacking,
-  receivingAttack,
-  tableClass,
-  controller
-) => {
+const clickAttack = (playerAttacking, receivingAttack, tableClass) => {
   const gridSquares = document.querySelectorAll(`${tableClass} .cell`);
 
   gridSquares.forEach((cell) => {
-    cell.addEventListener(
-      "click",
-      () => {
-        if (currentTurn.playerName === playerAttacking.name) {
-          // Sets coordinate values based on cell data
-          const x = Number(cell.dataset.x);
-          const y = Number(cell.dataset.y);
+    cell.addEventListener("click", () => {
+      if (
+        currentTurn.playerName === playerAttacking.name &&
+        onOff.status === "on"
+      ) {
+        // Sets coordinate values based on cell data
+        const x = Number(cell.dataset.x);
+        const y = Number(cell.dataset.y);
 
-          if (!wasCoordinateClicked(playerAttacking, [x, y])) {
-            // Adds coordinate to array of clicked coordinates
-            playerAttacking.markedSpots.push([x, y]);
+        if (!wasCoordinateClicked(playerAttacking, [x, y])) {
+          // Adds coordinate to array of clicked coordinates
+          playerAttacking.markedSpots.push([x, y]);
 
-            const hitStatus = receivingAttack.playerBoard.receiveAttack([x, y]);
+          const hitStatus = receivingAttack.playerBoard.receiveAttack([x, y]);
 
-            colorOnAttack(cell, hitStatus);
+          colorOnAttack(cell, hitStatus);
 
-            whoseTurn(hitStatus, playerAttacking, receivingAttack);
+          whoseTurn(hitStatus, playerAttacking, receivingAttack);
 
-            playerWin(playerAttacking, receivingAttack, controller);
+          playerWin(playerAttacking, receivingAttack);
 
-            computerClick(playerAttacking, receivingAttack, [x, y], hitStatus);
-          }
+          computerClick(playerAttacking, receivingAttack, [x, y], hitStatus);
         }
-      },
-      { signal: controller.signal }
-    );
+      }
+    });
   });
 };
 
