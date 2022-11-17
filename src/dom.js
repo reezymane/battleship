@@ -102,11 +102,11 @@ const dropToGameboard = (ev, x, y, shipName, shipLength, direction) => {
   }
 };
 
-// Hides draggable ship from display
-const hideShip = (shipID) => {
+// Toggles draggable ship displays
+const toggleShips = (shipID, display) => {
   const shipToHide = document.querySelector(shipID);
 
-  shipToHide.style.display = "none";
+  shipToHide.style.display = display;
 };
 
 // Checks if all ships have been placed
@@ -258,7 +258,7 @@ export {
   dragOver,
   shipIdentify,
   dropToGameboard,
-  hideShip,
+  toggleShips,
   resetCell,
   shipsDeployed,
   dragEnd

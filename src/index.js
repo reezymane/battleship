@@ -15,7 +15,7 @@ import {
   dragOver,
   shipIdentify,
   dropToGameboard,
-  hideShip,
+  toggleShips,
   resetCell,
   shipsDeployed,
   dragEnd
@@ -67,7 +67,7 @@ import {
           validDirection
         );
 
-        hideShip(`#${shipIdentifier.shipName}`);
+        toggleShips(`#${shipIdentifier.shipName}`, "none");
       }
 
       player1.playerBoard.colorGameboardShips([0, 0]);
@@ -124,10 +124,14 @@ import {
 
     resetCell();
 
+    ship.forEach((div) => {
+      toggleShips(`#${div.id}`, "block");
+    });
+
     controller.abort();
 
     if (onOff > 0) {
-      onOff--;
+      onOff = 0;
     }
   });
 })();
