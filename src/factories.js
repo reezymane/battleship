@@ -203,6 +203,28 @@ const gameboard = () => ({
     if (direction === "up") {
       return this.spaceBetween(xCoord - 1, yCoord, shipLength - 1, direction);
     }
+  },
+  // Clears ships and misses from gameboard
+  clearBoard([a, b]) {
+    if (a > 9) {
+      return;
+    }
+
+    if (b < 10) {
+      const inCoordinate = this.board[a][b];
+
+      if (inCoordinate !== 0) {
+        this.board[a][b] = 0;
+
+        return this.clearBoard([a, b + 1]);
+      }
+
+      return this.clearBoard([a, b + 1]);
+    }
+
+    if (b > 9) {
+      return this.clearBoard([a + 1, 0]);
+    }
   }
 });
 
