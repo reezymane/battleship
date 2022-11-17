@@ -128,6 +128,8 @@ import {
       toggleShips(`#${div.id}`, "block");
     });
 
+    placeComputerShips();
+
     controller.abort();
 
     if (onOff > 0) {
