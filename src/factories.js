@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-plusplus */
 /* eslint-disable import/no-cycle */
 /* eslint-disable consistent-return */
@@ -24,6 +25,10 @@ const ship = (length) => ({
     if (this.hitAmount === this.length) {
       this.sunk = true;
     }
+  },
+  resetShip() {
+    this.hitAmount = 0;
+    this.sunk = false;
   }
 });
 
