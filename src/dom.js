@@ -10,14 +10,9 @@ import {
   playerWin,
   computerClick
 } from "./gameModule";
-import dragIcon from "./img/dragIcon.png";
 
-// Sets ghost image, stores div ID, and makes div opaque
+// Stores div ID and makes div opaque
 const drag = (ev, div) => {
-  const img = new Image();
-  img.src = dragIcon;
-
-  ev.dataTransfer.setDragImage(img, -30, -30);
   ev.dataTransfer.setData("text", ev.target.id);
 
   div.style.opacity = "0.4";
