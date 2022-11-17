@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import "./style.css";
 import { currentTurn, player1, player2 } from "./factories";
 import { placeComputerShips, validPlacement } from "./gameModule";
@@ -69,15 +70,20 @@ import {
   // Determines which player goes first
   currentTurn.playerName = player1.name;
 
-  // Creates gameboard eventlisteners and abort signal
+  // Abort signal for gameboards
   const controller = new AbortController();
+
+  // On/Off switch for start button
+  let onOff = 0;
 
   // Clicking start activates gameboard listeners to start game
   const start = document.querySelector(".startButton");
   start.addEventListener("click", () => {
-    if (shipsDeployed()) {
+    if (shipsDeployed() && onOff === 0) {
       clickAttack(player1, player2, ".p2Grid", controller);
       clickAttack(player2, player1, ".p1Grid", controller);
+
+      onOff++;
     }
   });
 })();
