@@ -74,9 +74,6 @@ import {
     });
   });
 
-  // Determines which player goes first
-  currentTurn.playerName = player1.name;
-
   // Abort signal for gameboards
   const controller = new AbortController();
 
@@ -87,6 +84,9 @@ import {
   const start = document.querySelector(".startButton");
   start.addEventListener("click", () => {
     if (shipsDeployed() && onOff === 0) {
+      // Determines which player goes first
+      currentTurn.playerName = player1.name;
+
       clickAttack(player1, player2, ".p2Grid", controller);
       clickAttack(player2, player1, ".p1Grid", controller);
 
