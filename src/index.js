@@ -16,6 +16,7 @@ import {
   shipIdentify,
   dropToGameboard,
   hideShip,
+  resetCell,
   shipsDeployed,
   dragEnd
 } from "./dom";
@@ -120,6 +121,8 @@ import {
 
     player1.playerBoard.clearBoard([0, 0]);
     player2.playerBoard.clearBoard([0, 0]);
+
+    resetCell();
 
     controller.abort();
 
