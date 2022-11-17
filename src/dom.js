@@ -102,11 +102,11 @@ const dropToGameboard = (ev, x, y, shipName, shipLength, direction) => {
   }
 };
 
-// Removes draggable ship from display
-const removeShip = (shipID) => {
-  const shipToRemove = document.querySelector(shipID);
+// Hides draggable ship from display
+const hideShip = (shipID) => {
+  const shipToHide = document.querySelector(shipID);
 
-  shipToRemove.remove();
+  shipToHide.style.display = "none";
 };
 
 // Creates the first row of the table and names columns
@@ -235,6 +235,6 @@ export {
   dragOver,
   shipIdentify,
   dropToGameboard,
-  removeShip,
+  hideShip,
   dragEnd
 };

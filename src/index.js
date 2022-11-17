@@ -8,7 +8,7 @@ import {
   dragOver,
   shipIdentify,
   dropToGameboard,
-  removeShip,
+  hideShip,
   dragEnd
 } from "./dom";
 
@@ -58,7 +58,7 @@ import {
           validDirection
         );
 
-        removeShip(`#${shipIdentifier.shipName}`);
+        hideShip(`#${shipIdentifier.shipName}`);
       }
 
       player1.playerBoard.colorGameboardShips([0, 0]);
