@@ -86,4 +86,8 @@ import {
       onOff++;
     }
   });
+
+  // Clicking restart resets entire game
+  const restart = document.querySelector(".restartButton");
+  restart.addEventListener("click", () => {});
 })();
