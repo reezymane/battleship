@@ -1,7 +1,13 @@
 /* eslint-disable no-plusplus */
 import "./style.css";
-import { currentTurn, player1, player2 } from "./factories";
 import { placeComputerShips, validPlacement } from "./gameModule";
+import {
+  currentTurn,
+  player1,
+  player1Ships,
+  player2,
+  player2Ships
+} from "./factories";
 import {
   createTable,
   clickAttack,
@@ -89,5 +95,31 @@ import {
 
   // Clicking restart resets entire game
   const restart = document.querySelector(".restartButton");
-  restart.addEventListener("click", () => {});
+  restart.addEventListener("click", () => {
+    player1Ships.battleship1.resetShip();
+    player1Ships.destroyer11.resetShip();
+    player1Ships.destroyer12.resetShip();
+    player1Ships.submarine11.resetShip();
+    player1Ships.submarine12.resetShip();
+    player1Ships.submarine13.resetShip();
+    player1Ships.patrolBoat11.resetShip();
+    player1Ships.patrolBoat12.resetShip();
+    player1Ships.patrolBoat13.resetShip();
+    player1Ships.patrolBoat14.resetShip();
+
+    player2Ships.battleship2.resetShip();
+    player2Ships.destroyer21.resetShip();
+    player2Ships.destroyer22.resetShip();
+    player2Ships.submarine21.resetShip();
+    player2Ships.submarine22.resetShip();
+    player2Ships.submarine23.resetShip();
+    player2Ships.patrolBoat21.resetShip();
+    player2Ships.patrolBoat22.resetShip();
+    player2Ships.patrolBoat23.resetShip();
+    player2Ships.patrolBoat24.resetShip();
+
+    if (onOff > 0) {
+      onOff--;
+    }
+  });
 })();
