@@ -118,6 +118,11 @@ import {
     player2Ships.patrolBoat23.resetShip();
     player2Ships.patrolBoat24.resetShip();
 
+    player1.playerBoard.clearBoard([0, 0]);
+    player2.playerBoard.clearBoard([0, 0]);
+
+    controller.abort();
+
     if (onOff > 0) {
       onOff--;
     }
