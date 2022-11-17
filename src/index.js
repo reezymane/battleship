@@ -75,8 +75,9 @@ import {
   // Clicking start activates gameboard listeners to start game
   const start = document.querySelector(".startButton");
   start.addEventListener("click", () => {
-    console.log(shipsDeployed());
+    if (shipsDeployed()) {
+      clickAttack(player1, player2, ".p2Grid", controller);
+      clickAttack(player2, player1, ".p1Grid", controller);
+    }
   });
-  clickAttack(player1, player2, ".p2Grid", controller);
-  clickAttack(player2, player1, ".p1Grid", controller);
 })();
