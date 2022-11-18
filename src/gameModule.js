@@ -245,6 +245,21 @@ const trackHead = (shipObject, shipName, xCoord, yCoord) => {
   }
 };
 
+// Tracks ship orientation when placed
+const trackOrientation = (shipObject, shipName, validDirection) => {
+  for (const [key, value] of Object.entries(shipObject)) {
+    if (key === shipName) {
+      if (validDirection === "right" || validDirection === "left") {
+        value.orientation = "horizontal";
+      }
+
+      if (validDirection === "down" || validDirection === "up") {
+        value.orientation = "vertical";
+      }
+    }
+  }
+};
+
 export {
   validPlacement,
   placeComputerShips,
@@ -252,5 +267,6 @@ export {
   whoseTurn,
   playerWin,
   computerClick,
-  trackHead
+  trackHead,
+  trackOrientation
 };

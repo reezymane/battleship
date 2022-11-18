@@ -1,6 +1,11 @@
 /* eslint-disable no-plusplus */
 import "./style.css";
-import { placeComputerShips, validPlacement, trackHead } from "./gameModule";
+import {
+  placeComputerShips,
+  validPlacement,
+  trackHead,
+  trackOrientation
+} from "./gameModule";
 import {
   currentTurn,
   player1,
@@ -59,6 +64,8 @@ import {
       );
 
       if (validDirection != null) {
+        trackOrientation(player1Ships, shipIdentifier.shipName, validDirection);
+
         trackHead(player1Ships, shipIdentifier.shipName, xCoord, yCoord);
 
         dropToGameboard(
@@ -73,7 +80,6 @@ import {
         toggleShips(`#${shipIdentifier.shipName}`, "none");
 
         player1.playerBoard.colorGameboardShips([0, 0]);
-        console.log(player1Ships);
       }
     });
   });
