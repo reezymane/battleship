@@ -2,7 +2,7 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable import/no-cycle */
 /* eslint-disable consistent-return */
-import { colorCoordinate } from "./dom";
+import { colorCoordinate, resetCell } from "./dom";
 import { verticalPlacement, horizontalPlacement } from "./gameModule";
 
 // Determines if an attack hits or misses
@@ -270,14 +270,12 @@ const gameboard = () => ({
   // Changes orientation of a ship
   changeOrientation(playerClicking, xCoord, yCoord) {
     const inCoordinate = this.board[xCoord][yCoord];
-
     if (typeof inCoordinate === "object") {
       this.deleteShip(
         inCoordinate.head,
         inCoordinate.orientation,
         inCoordinate.length
       );
-      console.log(inCoordinate);
 
       if (
         inCoordinate.orientation === "right" ||
@@ -290,25 +288,23 @@ const gameboard = () => ({
           inCoordinate.length
         );
 
-        console.log(newPlacement);
+        if (newPlacement !== null) {
+          inCoordinate.orientation = newPlacement;
 
-        if (newPlacement === "down") {
-          console.log("new down");
-        }
+          this.readdShip(inCoordinate, newPlacement, inCoordinate.length);
 
-        if (newPlacement === "up") {
-          console.log("new up");
-        }
+          resetCell();
 
-        if (newPlacement === null) {
-          console.log("bad move!");
+          this.colorGameboardShips([0, 0]);
+        } else {
           this.readdShip(
             inCoordinate,
             inCoordinate.orientation,
             inCoordinate.length
           );
-          console.log(this.board);
         }
+
+        return;
       }
 
       if (
@@ -322,24 +318,20 @@ const gameboard = () => ({
           inCoordinate.length
         );
 
-        console.log(newPlacement);
+        if (newPlacement !== null) {
+          inCoordinate.orientation = newPlacement;
 
-        if (newPlacement === "right") {
-          console.log("new right");
-        }
+          this.readdShip(inCoordinate, newPlacement, inCoordinate.length);
 
-        if (newPlacement === "left") {
-          console.log("new left");
-        }
+          resetCell();
 
-        if (newPlacement === null) {
-          console.log("bad move!");
+          this.colorGameboardShips([0, 0]);
+        } else {
           this.readdShip(
             inCoordinate,
             inCoordinate.orientation,
             inCoordinate.length
           );
-          console.log(this.board);
         }
       }
     }
