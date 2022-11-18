@@ -35,8 +35,13 @@ import {
   createTable(".p1Board", "p1Grid");
   createTable(".p2Board", "p2Grid");
 
-  // Makes ship divs draggable
   const ship = document.querySelectorAll(".shipOuter div");
+  const gridCells = document.querySelectorAll(".p1Grid .cell");
+  const cellDivs = document.querySelectorAll(".p1Grid .cell .cellDiv");
+  const start = document.querySelector(".startButton");
+  const restart = document.querySelector(".restartButton");
+
+  // Makes ship divs draggable
   ship.forEach((div) => {
     div.addEventListener("dragstart", (event) => {
       drag(event, div);
@@ -48,7 +53,6 @@ import {
   });
 
   // Adds dropped ship to gameboard in player object and interface
-  const gridCells = document.querySelectorAll(".p1Grid .cell");
   gridCells.forEach((cell) => {
     cell.addEventListener("dragover", dragOver);
 
@@ -84,8 +88,17 @@ import {
     });
   });
 
+  // Changes orientation of ship when it's clicked
+  cellDivs.forEach((cell) => {
+    cell.addEventListener("click", () => {
+      const xCoord = Number(cell.dataset.x);
+      const yCoord = Number(cell.dataset.y);
+
+      player1.playerBoard.changeOrientation(xCoord, yCoord);
+    });
+  });
+
   // Clicking start activates gameboard listeners to start game
-  const start = document.querySelector(".startButton");
   start.addEventListener("click", () => {
     if (shipsDeployed()) {
       // Determines which player goes first
@@ -99,7 +112,6 @@ import {
   });
 
   // Clicking restart resets entire game
-  const restart = document.querySelector(".restartButton");
   restart.addEventListener("click", () => {
     player1Ships.battleship1.resetShip();
     player1Ships.destroyer11.resetShip();
