@@ -389,7 +389,8 @@ const player2Ships = {
 
 // Dynamic on/off switch for board event listeners
 const onOff = {
-  status: null
+  status: null,
+  rotate: "on"
 };
 
 export {
