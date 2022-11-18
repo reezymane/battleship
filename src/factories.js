@@ -225,6 +225,19 @@ const gameboard = () => ({
     if (b > 9) {
       return this.clearBoard([a + 1, 0]);
     }
+  },
+  // Changes orientation of a ship
+  changeOrientation(xCoord, yCoord) {
+    const inCoordinate = this.board[xCoord][yCoord];
+    if (typeof inCoordinate === "object") {
+      if (inCoordinate.orientation === "horizontal") {
+        console.log("horizontal");
+      }
+
+      if (inCoordinate.orientation === "vertical") {
+        console.log("vertical");
+      }
+    }
   }
 });
 
