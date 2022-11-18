@@ -198,6 +198,8 @@ const adjacentAttack = (
   randomX,
   randomY
 ) => {
+  const validAdjacent = [];
+
   // If adjacent cell is within gameboard and hasn't been clicked
   if (
     y + 1 >= 0 &&
@@ -207,8 +209,10 @@ const adjacentAttack = (
       y + 1
     ])
   ) {
-    correctCell(x, y + 1);
-  } else if (
+    validAdjacent.push([x, y + 1]);
+  }
+
+  if (
     x - 1 >= 0 &&
     x - 1 <= 9 &&
     !wasCoordinateClicked(whoIsComputer(playerAttacking, receivingAttack), [
@@ -216,8 +220,10 @@ const adjacentAttack = (
       y
     ])
   ) {
-    correctCell(x - 1, y);
-  } else if (
+    validAdjacent.push([x - 1, y]);
+  }
+
+  if (
     y - 1 >= 0 &&
     y - 1 <= 9 &&
     !wasCoordinateClicked(whoIsComputer(playerAttacking, receivingAttack), [
@@ -225,8 +231,10 @@ const adjacentAttack = (
       y - 1
     ])
   ) {
-    correctCell(x, y - 1);
-  } else if (
+    validAdjacent.push([x, y - 1]);
+  }
+
+  if (
     x + 1 >= 0 &&
     x + 1 <= 9 &&
     !wasCoordinateClicked(whoIsComputer(playerAttacking, receivingAttack), [
@@ -234,7 +242,17 @@ const adjacentAttack = (
       y
     ])
   ) {
-    correctCell(x + 1, y);
+    validAdjacent.push([x + 1, y]);
+  }
+
+  if (validAdjacent.length > 0) {
+    const randomDirection =
+      Math.floor(Math.random() * (validAdjacent.length - 1 - 0 + 1)) + 0;
+
+    correctCell(
+      validAdjacent[randomDirection][0],
+      validAdjacent[randomDirection][1]
+    );
   } else {
     newRandomCoordinate(playerAttacking, receivingAttack, randomX, randomY);
   }
