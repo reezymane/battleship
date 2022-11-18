@@ -94,7 +94,7 @@ import {
       const xCoord = Number(cell.dataset.x);
       const yCoord = Number(cell.dataset.y);
 
-      player1.playerBoard.changeOrientation(xCoord, yCoord);
+      player1.playerBoard.changeOrientation(player1, xCoord, yCoord);
     });
   });
 

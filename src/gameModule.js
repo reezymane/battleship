@@ -4,6 +4,44 @@
 /* eslint-disable no-plusplus */
 import { currentTurn, player2, player2Ships, onOff } from "./factories";
 
+// Verifies valid veritical placement
+const verticalPlacement = (player, xCoord, yCoord, length) => {
+  if (
+    player.playerBoard.enoughSpaces(xCoord, yCoord, length, "down") &&
+    player.playerBoard.spaceBetween(xCoord, yCoord, length, "down")
+  ) {
+    return "down";
+  }
+
+  if (
+    player.playerBoard.enoughSpaces(xCoord, yCoord, length, "up") &&
+    player.playerBoard.spaceBetween(xCoord, yCoord, length, "up")
+  ) {
+    return "up";
+  }
+
+  return null;
+};
+
+// Verifies valid horizontal placement
+const horizontalPlacement = (player, xCoord, yCoord, length) => {
+  if (
+    player.playerBoard.enoughSpaces(xCoord, yCoord, length, "right") &&
+    player.playerBoard.spaceBetween(xCoord, yCoord, length, "right")
+  ) {
+    return "right";
+  }
+
+  if (
+    player.playerBoard.enoughSpaces(xCoord, yCoord, length, "left") &&
+    player.playerBoard.spaceBetween(xCoord, yCoord, length, "left")
+  ) {
+    return "left";
+  }
+
+  return null;
+};
+
 // Verifies valid ship placement
 const validPlacement = (player, xCoord, yCoord, length) => {
   if (
@@ -249,12 +287,20 @@ const trackHead = (shipObject, shipName, xCoord, yCoord) => {
 const trackOrientation = (shipObject, shipName, validDirection) => {
   for (const [key, value] of Object.entries(shipObject)) {
     if (key === shipName) {
-      if (validDirection === "right" || validDirection === "left") {
-        value.orientation = "horizontal";
+      if (validDirection === "right") {
+        value.orientation = "right";
       }
 
-      if (validDirection === "down" || validDirection === "up") {
-        value.orientation = "vertical";
+      if (validDirection === "left") {
+        value.orientation = "left";
+      }
+
+      if (validDirection === "down") {
+        value.orientation = "down";
+      }
+
+      if (validDirection === "up") {
+        value.orientation = "up";
       }
     }
   }
@@ -268,5 +314,7 @@ export {
   playerWin,
   computerClick,
   trackHead,
-  trackOrientation
+  trackOrientation,
+  verticalPlacement,
+  horizontalPlacement
 };

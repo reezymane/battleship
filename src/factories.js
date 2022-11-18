@@ -3,6 +3,7 @@
 /* eslint-disable import/no-cycle */
 /* eslint-disable consistent-return */
 import { colorCoordinate } from "./dom";
+import { verticalPlacement, horizontalPlacement } from "./gameModule";
 
 // Determines if an attack hits or misses
 const hitOrMiss = (inCoordinate) => {
@@ -226,16 +227,89 @@ const gameboard = () => ({
       return this.clearBoard([a + 1, 0]);
     }
   },
-  // Changes orientation of a ship
-  changeOrientation(xCoord, yCoord) {
-    const inCoordinate = this.board[xCoord][yCoord];
-    if (typeof inCoordinate === "object") {
-      if (inCoordinate.orientation === "horizontal") {
-        console.log("horizontal");
+  // Deletes single ship
+  deleteShip(headCoordinate, orientation, length) {
+    for (let i = 0; i < length; i++) {
+      if (orientation === "right") {
+        this.board[headCoordinate[0]][headCoordinate[1] + i] = 0;
       }
 
-      if (inCoordinate.orientation === "vertical") {
-        console.log("vertical");
+      if (orientation === "left") {
+        this.board[headCoordinate[0]][headCoordinate[1] - i] = 0;
+      }
+
+      if (orientation === "down") {
+        this.board[headCoordinate[0] + i][headCoordinate[1]] = 0;
+      }
+
+      if (orientation === "up") {
+        this.board[headCoordinate[0] - i][headCoordinate[1]] = 0;
+      }
+    }
+  },
+  // Changes orientation of a ship
+  changeOrientation(playerClicking, xCoord, yCoord) {
+    const inCoordinate = this.board[xCoord][yCoord];
+
+    if (typeof inCoordinate === "object") {
+      this.deleteShip(
+        inCoordinate.head,
+        inCoordinate.orientation,
+        inCoordinate.length
+      );
+      console.log(inCoordinate);
+      console.log(this.board);
+
+      if (
+        inCoordinate.orientation === "right" ||
+        inCoordinate.orientation === "left"
+      ) {
+        const newPlacement = verticalPlacement(
+          playerClicking,
+          xCoord,
+          yCoord,
+          inCoordinate.length
+        );
+
+        console.log(newPlacement);
+
+        if (newPlacement === "down") {
+          console.log("new down");
+        }
+
+        if (newPlacement === "up") {
+          console.log("new up");
+        }
+
+        if (newPlacement === null) {
+          console.log("bad move!");
+        }
+      }
+
+      if (
+        inCoordinate.orientation === "down" ||
+        inCoordinate.orientation === "up"
+      ) {
+        const newPlacement = horizontalPlacement(
+          playerClicking,
+          xCoord,
+          yCoord,
+          inCoordinate.length
+        );
+
+        console.log(newPlacement);
+
+        if (newPlacement === "right") {
+          console.log("new right");
+        }
+
+        if (newPlacement === "left") {
+          console.log("new left");
+        }
+
+        if (newPlacement === null) {
+          console.log("bad move!");
+        }
       }
     }
   }
