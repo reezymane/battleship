@@ -192,16 +192,23 @@ const colorCoordinate = ([a, b]) => {
 
 // Changes cell color when attacked
 const colorOnAttack = (cell, hitStatus) => {
+  const para = document.createElement("p");
+  para.classList.add("cellDiv");
+
   if (hitStatus === "miss") {
     cell.style.backgroundColor = "tan";
-    cell.textContent = "•";
+    para.textContent = "•";
+
+    cell.appendChild(para);
   }
 
   if (hitStatus === "hit") {
     cell.style.backgroundColor = "pink";
     cell.style.border = "1px solid red";
     cell.style.color = "red";
-    cell.textContent = "X";
+    para.textContent = "X";
+
+    cell.appendChild(para);
   }
 };
 
@@ -212,7 +219,10 @@ const resetCell = () => {
     cell.style.backgroundColor = "transparent";
     cell.style.border = "1px solid white";
     cell.style.color = "initial";
-    cell.textContent = "";
+
+    if (cell.firstChild.nextSibling !== null) {
+      cell.removeChild(cell.firstChild.nextSibling);
+    }
   });
 };
 
