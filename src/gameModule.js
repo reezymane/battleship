@@ -236,11 +236,21 @@ const playerWin = (playerAttacking, receivingAttack) => {
   }
 };
 
+// Tracks the head of the ship
+const trackHead = (shipObject, shipName, xCoord, yCoord) => {
+  for (const [key, value] of Object.entries(shipObject)) {
+    if (key === shipName) {
+      value.head = [xCoord, yCoord];
+    }
+  }
+};
+
 export {
   validPlacement,
   placeComputerShips,
   wasCoordinateClicked,
   whoseTurn,
   playerWin,
-  computerClick
+  computerClick,
+  trackHead
 };
