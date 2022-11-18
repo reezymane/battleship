@@ -91,10 +91,12 @@ import {
   // Changes orientation of ship when it's clicked
   cellDivs.forEach((cell) => {
     cell.addEventListener("click", () => {
-      const xCoord = Number(cell.dataset.x);
-      const yCoord = Number(cell.dataset.y);
+      if (onOff.rotate === "on") {
+        const xCoord = Number(cell.dataset.x);
+        const yCoord = Number(cell.dataset.y);
 
-      player1.playerBoard.changeOrientation(player1, xCoord, yCoord);
+        player1.playerBoard.changeOrientation(player1, xCoord, yCoord);
+      }
     });
   });
 
@@ -108,6 +110,7 @@ import {
       clickAttack(player2, player1, ".p1Grid");
 
       onOff.status = "on";
+      onOff.rotate = "off";
     }
   });
 
@@ -150,5 +153,6 @@ import {
     placeComputerShips();
 
     onOff.status = "off";
+    onOff.rotate = "on";
   });
 })();
