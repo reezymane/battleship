@@ -184,7 +184,7 @@ const gameboard = () => ({
       return false;
     }
 
-    if (shipLength === 0) {
+    if (shipLength === 1) {
       return true;
     }
 
