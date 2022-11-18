@@ -247,6 +247,26 @@ const gameboard = () => ({
       }
     }
   },
+  // Re-adds single ship to gameboard
+  readdShip(shipToReadd, orientation, length) {
+    for (let i = 0; i < length; i++) {
+      if (orientation === "right") {
+        this.board[shipToReadd.head[0]][shipToReadd.head[1] + i] = shipToReadd;
+      }
+
+      if (orientation === "left") {
+        this.board[shipToReadd.head[0]][shipToReadd.head[1] - i] = shipToReadd;
+      }
+
+      if (orientation === "down") {
+        this.board[shipToReadd.head[0] + i][shipToReadd.head[1]] = shipToReadd;
+      }
+
+      if (orientation === "up") {
+        this.board[shipToReadd.head[0] - i][shipToReadd.head[1]] = shipToReadd;
+      }
+    }
+  },
   // Changes orientation of a ship
   changeOrientation(playerClicking, xCoord, yCoord) {
     const inCoordinate = this.board[xCoord][yCoord];
@@ -258,7 +278,6 @@ const gameboard = () => ({
         inCoordinate.length
       );
       console.log(inCoordinate);
-      console.log(this.board);
 
       if (
         inCoordinate.orientation === "right" ||
@@ -283,6 +302,12 @@ const gameboard = () => ({
 
         if (newPlacement === null) {
           console.log("bad move!");
+          this.readdShip(
+            inCoordinate,
+            inCoordinate.orientation,
+            inCoordinate.length
+          );
+          console.log(this.board);
         }
       }
 
@@ -309,6 +334,12 @@ const gameboard = () => ({
 
         if (newPlacement === null) {
           console.log("bad move!");
+          this.readdShip(
+            inCoordinate,
+            inCoordinate.orientation,
+            inCoordinate.length
+          );
+          console.log(this.board);
         }
       }
     }
