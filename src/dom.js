@@ -152,12 +152,17 @@ const createRows = (tableClass) => {
 
     for (let littleI = 0; littleI < 10; littleI++) {
       const cell = document.createElement("td");
+      const cellDiv = document.createElement("div");
 
       cell.classList.add("cell");
+      cellDiv.classList.add("cellDiv");
       cell.setAttribute("data-x", bigI);
       cell.setAttribute("data-y", littleI);
+      cellDiv.setAttribute("data-x", bigI);
+      cellDiv.setAttribute("data-y", littleI);
 
       row.appendChild(cell);
+      cell.appendChild(cellDiv);
     }
   }
 };
