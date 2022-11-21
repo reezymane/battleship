@@ -280,7 +280,21 @@ const computerClick = (playerAttacking, receivingAttack, [x, y], hitStatus) => {
 
 // Displays winner of the game
 const displayWinner = (playerAttacking) => {
-  console.log(playerAttacking.name);
+  const winnerDiv = document.querySelector(".winnerDiv");
+  const para = document.createElement("p");
+
+  para.textContent = `${playerAttacking.name} wins!`;
+
+  winnerDiv.appendChild(para);
+  winnerDiv.style.display = "flex";
+};
+
+// Hides winner div
+const hideWinner = () => {
+  const winnerDiv = document.querySelector(".winnerDiv");
+  winnerDiv.removeChild(winnerDiv.firstChild);
+
+  winnerDiv.style.display = "none";
 };
 
 // Ends game and displays winner
@@ -334,5 +348,6 @@ export {
   trackHead,
   trackOrientation,
   verticalPlacement,
-  horizontalPlacement
+  horizontalPlacement,
+  hideWinner
 };

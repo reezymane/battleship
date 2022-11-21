@@ -4,7 +4,8 @@ import {
   placeComputerShips,
   validPlacement,
   trackHead,
-  trackOrientation
+  trackOrientation,
+  hideWinner
 } from "./gameModule";
 import {
   currentTurn,
@@ -151,6 +152,7 @@ import {
     });
 
     placeComputerShips();
+    hideWinner();
 
     onOff.status = "off";
     onOff.rotate = "on";
