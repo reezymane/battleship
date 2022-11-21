@@ -356,7 +356,7 @@ const currentTurn = {
 };
 
 // Creates players and boards
-const player1 = player("player1");
+const player1 = player("Player1");
 const player2 = player("Computer");
 
 // Creates player1 ships
