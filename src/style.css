@@ -4,17 +4,17 @@
   margin: 0;
 }
 
-/*Set page size and backround image*/
-html {
+/*Set page layout direction, backround image, and page size*/
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+
   background-image: url(./img/background.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
-}
 
-/*Set page layout direction*/
-body {
-  display: flex;
-  flex-direction: column;
+  height: 100vh;
+  width: min(1440px, 100vw);
 }
 
 .mainContainer {
