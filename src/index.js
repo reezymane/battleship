@@ -4,8 +4,7 @@ import {
   placeComputerShips,
   validPlacement,
   trackHead,
-  trackOrientation,
-  hideWinner
+  trackOrientation
 } from "./gameModule";
 import {
   currentTurn,
@@ -25,7 +24,9 @@ import {
   toggleShips,
   resetCell,
   shipsDeployed,
-  dragEnd
+  dragEnd,
+  hideWinner,
+  firstMove
 } from "./dom";
 
 (() => {
@@ -112,6 +113,8 @@ import {
 
       onOff.status = "on";
       onOff.rotate = "off";
+
+      firstMove();
     }
   });
 

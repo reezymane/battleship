@@ -11,6 +11,41 @@ import {
   computerClick
 } from "./gameModule";
 
+// Displays winner of the game
+const displayWinner = (playerAttacking) => {
+  const winnerDiv = document.querySelector(".winnerDiv");
+  const para = document.createElement("p");
+
+  para.textContent = `${playerAttacking.name} wins!`;
+
+  winnerDiv.appendChild(para);
+  winnerDiv.style.display = "flex";
+};
+
+// Hides winner div
+const hideWinner = () => {
+  const winnerDiv = document.querySelector(".winnerDiv");
+  winnerDiv.removeChild(winnerDiv.firstChild);
+
+  winnerDiv.style.display = "none";
+};
+
+// Displays who goes first
+const firstMove = () => {
+  const winnerDiv = document.querySelector(".winnerDiv");
+  const para = document.createElement("p");
+
+  para.textContent = "Player1 gets first move!";
+
+  winnerDiv.appendChild(para);
+  winnerDiv.style.display = "flex";
+
+  setTimeout(() => {
+    winnerDiv.removeChild(winnerDiv.firstChild);
+    winnerDiv.style.display = "none";
+  }, 3000);
+};
+
 // Stores div ID and makes div opaque
 const drag = (ev, div) => {
   ev.dataTransfer.setData("text", ev.target.id);
@@ -270,5 +305,8 @@ export {
   toggleShips,
   resetCell,
   shipsDeployed,
-  dragEnd
+  dragEnd,
+  displayWinner,
+  hideWinner,
+  firstMove
 };

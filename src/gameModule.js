@@ -3,6 +3,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-plusplus */
 import { currentTurn, player2, player2Ships, onOff } from "./factories";
+import { displayWinner } from "./dom";
 
 // Verifies valid veritical placement
 const verticalPlacement = (player, xCoord, yCoord, length) => {
@@ -278,25 +279,6 @@ const computerClick = (playerAttacking, receivingAttack, [x, y], hitStatus) => {
   }
 };
 
-// Displays winner of the game
-const displayWinner = (playerAttacking) => {
-  const winnerDiv = document.querySelector(".winnerDiv");
-  const para = document.createElement("p");
-
-  para.textContent = `${playerAttacking.name} wins!`;
-
-  winnerDiv.appendChild(para);
-  winnerDiv.style.display = "flex";
-};
-
-// Hides winner div
-const hideWinner = () => {
-  const winnerDiv = document.querySelector(".winnerDiv");
-  winnerDiv.removeChild(winnerDiv.firstChild);
-
-  winnerDiv.style.display = "none";
-};
-
 // Ends game and displays winner
 const playerWin = (playerAttacking, receivingAttack) => {
   if (receivingAttack.playerBoard.allSunk([0, 0])) {
@@ -348,6 +330,5 @@ export {
   trackHead,
   trackOrientation,
   verticalPlacement,
-  horizontalPlacement,
-  hideWinner
+  horizontalPlacement
 };
