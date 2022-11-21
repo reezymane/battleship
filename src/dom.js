@@ -25,9 +25,12 @@ const displayWinner = (playerAttacking) => {
 // Hides winner div
 const hideWinner = () => {
   const winnerDiv = document.querySelector(".winnerDiv");
-  winnerDiv.removeChild(winnerDiv.firstChild);
 
-  winnerDiv.style.display = "none";
+  if (winnerDiv.firstChild !== null) {
+    winnerDiv.removeChild(winnerDiv.firstChild);
+
+    winnerDiv.style.display = "none";
+  }
 };
 
 // Displays who goes first
