@@ -14,8 +14,8 @@
   background-repeat: no-repeat;
   background-size: cover;
 
-  height: 100vh;
-  width: min(1440px, 100vw);
+  height: max(821px, 100vh);
+  width: max(1440px, 100vw);
 }
 
 /*Centering the winner display*/
@@ -49,6 +49,31 @@
   gap: 150px;
 }
 
+/*Align player boards and names*/
+.p1Div,
+.p2Div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*Player name styling*/
+.p1Name,
+.p2Name {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+
+  font-size: 17px;
+  color: antiquewhite;
+
+  padding: 5px 0;
+  margin-top: 5px;
+  width: 80%;
+
+  display: flex;
+  justify-content: center;
+}
+
 /*Player board styling*/
 .p1Board,
 .p2Board {
@@ -60,7 +85,7 @@
 /*Footer styling*/
 footer {
   height: 60px;
-  width: 100vw;
+  width: max(1440px, 100vw);
   margin-top: 20px;
   padding: 5px 0;
 
