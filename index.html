@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Battleship!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script defer src="./runtime.main.js"></script>
+    <script defer src="./index.main.js"></script>
+    <script defer src="./factories.main.js"></script>
+    <script defer src="./dom.main.js"></script>
+    <script defer src="./gameModule.main.js"></script>
+
+    <link rel="stylesheet" href="../src/style.css" />
+  </head>
+  <body>
+    <div class="pageContainer">
+      <div class="winnerDiv"></div>
+
+      <div class="mainContainer">
+        <div class="p1Div">
+          <div class="p1Board"></div>
+          <div class="p1Name"></div>
+        </div>
+
+        <div class="p2Div">
+          <div class="p2Board"></div>
+          <div class="p2Name"></div>
+        </div>
+      </div>
+
+      <div class="uiContainer">
+        <div class="dragAndDrop">
+          <div class="ddText">
+            <p class="ddPara">Drag and drop your ships:</p>
+          </div>
+          <div class="shipContainer">
+            <div class="shipInnerContainer">
+              <div class="shipOuter" id="b1">
+                <div class="ship" id="battleship1" draggable="true"></div>
+              </div>
+            </div>
+            <div class="shipInnerContainer">
+              <div class="shipOuter" id="d11">
+                <div class="ship" id="destroyer11" draggable="true"></div>
+              </div>
+              <div class="shipOuter" id="d12">
+                <div class="ship" id="destroyer12" draggable="true"></div>
+              </div>
+            </div>
+            <div class="shipInnerContainer">
+              <div class="shipOuter" id="s11">
+                <div class="ship" id="submarine11" draggable="true"></div>
+              </div>
+              <div class="shipOuter" id="s12">
+                <div class="ship" id="submarine12" draggable="true"></div>
+              </div>
+              <div class="shipOuter" id="s13">
+                <div class="ship" id="submarine13" draggable="true"></div>
+              </div>
+            </div>
+            <div class="shipInnerContainer">
+              <div class="shipOuter" id="p11">
+                <div class="ship" id="patrolBoat11" draggable="true"></div>
+              </div>
+              <div class="shipOuter" id="p12">
+                <div class="ship" id="patrolBoat12" draggable="true"></div>
+              </div>
+              <div class="shipOuter" id="p13">
+                <div class="ship" id="patrolBoat13" draggable="true"></div>
+              </div>
+              <div class="shipOuter" id="p14">
+                <div class="ship" id="patrolBoat14" draggable="true"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="buttonDiv">
+          <button class="startButton">Start</button>
+          <button class="restartButton">Restart</button>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="title">Battleship!</div>
+        <div class="copyright">
+          Copyright <span>&copy;</span> ReezyTech 2022
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
